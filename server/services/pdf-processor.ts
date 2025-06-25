@@ -1026,6 +1026,59 @@ class PdfProcessor {
 
     return results;
   }
+
+  async searchDeclaracaoSpecific(searchTerm: string): Promise<BookReference[]> {
+    const results: BookReference[] = [];
+    const termLower = searchTerm.toLowerCase();
+
+    // Search through all Declaração de Fé content
+    for (const [key, items] of this.declaracaoContent.entries()) {
+      // Check if key contains the search term
+      if (key.includes(termLower)) {
+        for (const item of items) {
+          results.push({
+            bookTitle: "Declaração de Fé das Assembleias de Deus",
+            page: item.page,
+            line: item.line,
+            quote: item.text,
+            chapter: item.chapter
+          });
+        }
+      }
+    }
+
+    // Also search within the text content of items
+    for (const [, items] of this.declaracaoContent.entries()) {
+      for (const item of items) {
+        if (item.text.toLowerCase().includes(termLower)) {
+          // Avoid duplicates
+          const isDuplicate = results.some(r => 
+            r.page === item.page && r.line === item.line
+          );
+          
+          if (!isDuplicate) {
+            results.push({
+              bookTitle: "Declaração de Fé das Assembleias de Deus",
+              page: item.page,
+              line: item.line,
+              quote: item.text,
+              chapter: item.chapter
+            });
+          }
+        }
+      }
+    }
+
+    // Sort by page and line
+    results.sort((a, b) => {
+      if (a.page !== b.page) {
+        return a.page - b.page;
+      }
+      return a.line - b.line;
+    });
+
+    return results.slice(0, 20); // Limit to 20 results
+  }
 }
 
 export const pdfProcessor = new PdfProcessor();

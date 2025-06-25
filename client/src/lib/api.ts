@@ -37,4 +37,10 @@ export const api = {
     const response = await apiRequest("POST", "/api/generate-image", { prompt });
     return await response.json();
   },
+
+  // Search in Declaração de Fé book
+  async searchDeclaracao(term: string) {
+    const response = await apiRequest("POST", "/api/search-declaracao", { term });
+    return await response.json();
+  },
 };

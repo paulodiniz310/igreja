@@ -138,6 +138,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.post("/api/search-declaracao", async (req, res) => {
+    try {
+      const { term } = req.body;
+      
+      if (!term || typeof term !== 'string') {
+        return res.status(400).json({ error: "Termo de busca é obrigatório" });
+      }
+
+      const results = await pdfProcessor.searchDeclaracaoSpecific(term);
+      res.json(results);
+    } catch (error: any) {
+      console.error("Erro na busca da Declaração de Fé:", error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
