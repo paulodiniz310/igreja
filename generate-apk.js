@@ -4,6 +4,15 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
+// Make script executable
+if (process.platform !== 'win32') {
+  try {
+    execSync('chmod +x generate-apk.js');
+  } catch (error) {
+    // Ignore if already executable
+  }
+}
+
 console.log('🚀 Iniciando geração de APK para CPAD Consulta Bíblica');
 
 // Verificar se o Cordova está instalado
