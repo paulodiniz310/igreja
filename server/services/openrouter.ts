@@ -82,26 +82,33 @@ class OpenRouterService {
     };
 
     return `
-Como consultor teológico da Assembleia de Deus CPAD, responda à seguinte pergunta no nível ${responseLevel}:
+Como consultor teológico especialista da Assembleia de Deus CPAD, responda à pergunta no nível ${responseLevel}:
 
 "${question}"
 
 ${levelInstructions[responseLevel as keyof typeof levelInstructions]}
 
-Estruture sua resposta em JSON com os seguintes campos:
+IMPORTANTE: Se não encontrar referências específicas nos livros da CPAD, complemente a resposta com a perspectiva doutrinária da Assembleia de Deus baseada nos princípios pentecostais clássicos.
+
+Estruture sua resposta SEMPRE em JSON válido com os seguintes campos:
 {
-  "explanation": "Explicação baseada na doutrina da Assembleia de Deus",
+  "explanation": "Explicação detalhada baseada na doutrina pentecostal da Assembleia de Deus CPAD, incluindo contexto histórico e teológico quando necessário",
   "verses": [
     {
-      "text": "Texto do versículo",
-      "reference": "Referência bíblica",
-      "explanation": "Explicação do versículo no contexto"
+      "text": "Texto completo do versículo da ARC",
+      "reference": "Referência bíblica completa (livro capítulo:versículo)",
+      "explanation": "Explicação contextual do versículo aplicado à pergunta"
     }
   ],
-  "complement": "Informações complementares e aplicação prática"
+  "complement": "Aplicação prática e orientações pastorais baseadas na tradição pentecostal da AD, incluindo como este ensino se aplica na vida do crente hoje"
 }
 
-Use sempre versículos da Almeida Revista e Corrigida (ARC) e mantenha fidelidade aos ensinamentos pentecostais clássicos.
+Diretrizes obrigatórias:
+- Use EXCLUSIVAMENTE versículos da Almeida Revista e Corrigida (ARC)
+- Mantenha absoluta fidelidade aos ensinamentos pentecostais clássicos da AD
+- Forneça pelo menos 2-3 versículos relevantes para fundamentar a resposta
+- Responda sempre do ponto de vista da Assembleia de Deus CPAD
+- Se a pergunta envolver questões controversas, apresente a posição oficial da AD
 `;
   }
 
