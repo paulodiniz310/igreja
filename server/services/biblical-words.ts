@@ -119,6 +119,66 @@ class BiblicalWordsService {
         language: "grego",
         translation: "Cristo, o Ungido, Messias",
         context: "Título que indica Jesus como o Messias prometido"
+      },
+      {
+        word: "משיח (Mashiach)",
+        language: "hebraico",
+        translation: "Ungido, Messias",
+        context: "Termo hebraico para o Ungido de Deus prometido"
+      }
+    ]);
+
+    this.wordDatabase.set("adoração", [
+      {
+        word: "προσκυνέω (proskyneo)",
+        language: "grego",
+        translation: "adorar, prostrar-se, reverenciar",
+        context: "Adoração devida somente a Deus"
+      },
+      {
+        word: "שחה (shachah)",
+        language: "hebraico",
+        translation: "prostrar-se, inclinar-se, adorar",
+        context: "Ato de adoração e reverência no Antigo Testamento"
+      }
+    ]);
+
+    this.wordDatabase.set("anjo", [
+      {
+        word: "ἄγγελος (angelos)",
+        language: "grego",
+        translation: "mensageiro, anjo",
+        context: "Ser celestial enviado por Deus como mensageiro"
+      },
+      {
+        word: "מלאך (malach)",
+        language: "hebraico",
+        translation: "mensageiro, anjo",
+        context: "Ser espiritual criado por Deus para servi-Lo"
+      }
+    ]);
+
+    this.wordDatabase.set("oração", [
+      {
+        word: "προσευχή (proseuche)",
+        language: "grego",
+        translation: "oração, súplica, petição",
+        context: "Comunicação com Deus através da oração"
+      },
+      {
+        word: "תפלה (tefilah)",
+        language: "hebraico",
+        translation: "oração, súplica",
+        context: "Ato de orar e buscar a Deus"
+      }
+    ]);
+
+    this.wordDatabase.set("santificação", [
+      {
+        word: "ἁγιασμός (hagiasmos)",
+        language: "grego",
+        translation: "santificação, consagração",
+        context: "Processo de separação para Deus e purificação"
       }
     ]);
   }
