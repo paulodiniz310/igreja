@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import QueryInput from "@/components/query-input";
 import ResponseDisplay from "@/components/response-display";
 import HistorySidebar from "@/components/history-sidebar";
@@ -6,7 +7,7 @@ import SettingsModal from "@/components/settings-modal";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalStorage } from "@/hooks/use-local-storage";
-import { History, Settings } from "lucide-react";
+import { History, Settings, Search } from "lucide-react";
 
 export default function Home() {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
@@ -37,6 +38,15 @@ export default function Home() {
               </div>
             </div>
             <div className="flex space-x-2">
+              <Link href="/search-declaracao">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 rounded-full hover:bg-primary-700 text-white"
+                >
+                  <Search className="h-5 w-5" />
+                </Button>
+              </Link>
               <Button
                 variant="ghost"
                 size="sm"
