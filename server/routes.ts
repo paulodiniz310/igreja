@@ -5,6 +5,7 @@ import { insertConversationSchema, insertSettingsSchema, type QueryRequest, type
 import { openRouterService } from "./services/openrouter";
 import { pdfProcessor } from "./services/pdf-processor";
 import { biblicalWordsService } from "./services/biblical-words";
+import { biblicalTextService } from "./services/biblical-text";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -29,10 +30,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         biblicalWordsService.findOriginalWords(question)
       ]);
 
+      // Enhance verses with original text
+      const enhancedVerses = await biblicalTextService.enhanceVersesWithOriginal(aiResponse.verses);
+
       // Structure the biblical response
       const response: BiblicalResponse = {
         adExplanation: aiResponse.explanation,
-        verses: aiResponse.verses,
+        verses: enhancedVerses,
         originalWords: biblicalWords,
         bookReferences: pdfContent,
         aiComplement: aiResponse.complement

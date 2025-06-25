@@ -36,6 +36,7 @@ export interface BiblicalResponse {
   adExplanation: string;
   verses: Array<{
     text: string;
+    originalText?: string;
     reference: string;
     explanation: string;
   }>;
