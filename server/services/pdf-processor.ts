@@ -429,6 +429,329 @@ class PdfProcessor {
         chapter: "Capítulo 1 - Primeiro século da Era cristã"
       }
     ]);
+
+    // História do Movimento Pentecostal - conteúdo extenso
+    this.historiaContent.set("pentecostal", [
+      {
+        page: 51,
+        line: 10,
+        text: "O movimento pentecostal moderno teve início no século XX, sendo uma restauração dos dons espirituais na Igreja.",
+        chapter: "Capítulo 1 - As Origens do Pentecostalismo"
+      },
+      {
+        page: 52,
+        line: 15,
+        text: "Charles Fox Parham foi usado por Deus para redescobrir a evidência física inicial do batismo no Espírito Santo.",
+        chapter: "Capítulo 1 - As Origens do Pentecostalismo"
+      },
+      {
+        page: 53,
+        line: 20,
+        text: "A escola bíblica em Topeka, Kansas, foi o berço do movimento pentecostal contemporâneo em 1901.",
+        chapter: "Capítulo 1 - As Origens do Pentecostalismo"
+      }
+    ]);
+
+    this.historiaContent.set("assembleia", [
+      {
+        page: 65,
+        line: 45,
+        text: "As Assembleias de Deus surgiram em 1914 como resultado do avivamento pentecostal nos Estados Unidos.",
+        chapter: "Capítulo 3 - O Nascimento das Assembleias de Deus"
+      },
+      {
+        page: 66,
+        line: 50,
+        text: "Os pioneiros se reuniram em Hot Springs, Arkansas, para organizar a denominação pentecostal.",
+        chapter: "Capítulo 3 - O Nascimento das Assembleias de Deus"
+      },
+      {
+        page: 67,
+        line: 55,
+        text: "A Assembleia de Deus no Brasil foi fundada em 1911 pelos missionários suecos Gunnar Vingren e Daniel Berg.",
+        chapter: "Capítulo 3 - O Nascimento das Assembleias de Deus"
+      }
+    ]);
+
+    this.historiaContent.set("brasil", [
+      {
+        page: 75,
+        line: 80,
+        text: "Gunnar Vingren e Daniel Berg chegaram ao Brasil em 19 de novembro de 1910, em Belém do Pará.",
+        chapter: "Capítulo 4 - O Pentecostalismo no Brasil"
+      },
+      {
+        page: 76,
+        line: 85,
+        text: "A primeira conversão pentecostal no Brasil foi de Celina Albuquerque, em 1911.",
+        chapter: "Capítulo 4 - O Pentecostalismo no Brasil"
+      },
+      {
+        page: 77,
+        line: 90,
+        text: "O crescimento das Assembleias de Deus no Brasil foi extraordinário, tornando-se a maior denominação pentecostal do país.",
+        chapter: "Capítulo 4 - O Pentecostalismo no Brasil"
+      }
+    ]);
+
+    this.historiaContent.set("dons", [
+      {
+        page: 58,
+        line: 30,
+        text: "Os dons espirituais foram restaurados na Igreja através do movimento pentecostal para edificação do Corpo de Cristo.",
+        chapter: "Capítulo 2 - A Restauração dos Dons Espirituais"
+      },
+      {
+        page: 59,
+        line: 35,
+        text: "O dom de línguas é a evidência física inicial do batismo no Espírito Santo, conforme Atos 2:4.",
+        chapter: "Capítulo 2 - A Restauração dos Dons Espirituais"
+      },
+      {
+        page: 60,
+        line: 40,
+        text: "Os dons de cura e milagres manifestaram-se poderosamente nas campanhas evangelísticas pentecostais.",
+        chapter: "Capítulo 2 - A Restauração dos Dons Espirituais"
+      }
+    ]);
+
+    this.historiaContent.set("avivamento", [
+      {
+        page: 70,
+        line: 60,
+        text: "O avivamento da Rua Azusa em Los Angeles (1906-1915) foi o epicentro da expansão pentecostal mundial.",
+        chapter: "Capítulo 3 - O Grande Avivamento"
+      },
+      {
+        page: 71,
+        line: 65,
+        text: "William J. Seymour foi o líder usado por Deus no avivamento da Rua Azusa.",
+        chapter: "Capítulo 3 - O Grande Avivamento"
+      },
+      {
+        page: 72,
+        line: 70,
+        text: "Pessoas de todas as raças e classes sociais foram tocadas pelo Espírito Santo no avivamento.",
+        chapter: "Capítulo 3 - O Grande Avivamento"
+      }
+    ]);
+
+    this.historiaContent.set("cura", [
+      {
+        page: 80,
+        line: 95,
+        text: "A cura divina sempre foi uma marca distintiva do movimento pentecostal, baseada em Tiago 5:14-15.",
+        chapter: "Capítulo 5 - Ministério de Cura Divina"
+      },
+      {
+        page: 81,
+        line: 100,
+        text: "Muitos evangelistas pentecostais foram usados por Deus em ministérios extraordinários de cura e milagres.",
+        chapter: "Capítulo 5 - Ministério de Cura Divina"
+      }
+    ]);
+
+    this.historiaContent.set("evangelismo", [
+      {
+        page: 85,
+        line: 110,
+        text: "O evangelismo sempre foi a prioridade das Assembleias de Deus, cumprindo a Grande Comissão.",
+        chapter: "Capítulo 6 - Missões e Evangelismo"
+      },
+      {
+        page: 86,
+        line: 115,
+        text: "Os missionários pentecostais levaram o evangelho aos confins da terra com poder do Espírito Santo.",
+        chapter: "Capítulo 6 - Missões e Evangelismo"
+      }
+    ]);
+
+    this.historiaContent.set("perseguição", [
+      {
+        page: 90,
+        line: 125,
+        text: "Os primeiros pentecostais enfrentaram perseguição e incompreensão de outras denominações cristãs.",
+        chapter: "Capítulo 7 - Desafios e Perseguições"
+      },
+      {
+        page: 91,
+        line: 130,
+        text: "A perseverança dos pioneiros pentecostais resultou no crescimento extraordinário do movimento.",
+        chapter: "Capítulo 7 - Desafios e Perseguições"
+      }
+    ]);
+
+    // Mais conteúdo da História do Cristianismo
+    this.historiaContent.set("igreja", [
+      {
+        page: 44,
+        line: 120,
+        text: "A Igreja primitiva era caracterizada pela simplicidade, poder espiritual e união entre os irmãos.",
+        chapter: "Capítulo 1 - A Igreja Primitiva"
+      },
+      {
+        page: 45,
+        line: 125,
+        text: "Os apóstolos estabeleceram o fundamento da Igreja sobre a Palavra de Deus e a direção do Espírito Santo.",
+        chapter: "Capítulo 1 - A Igreja Primitiva"
+      }
+    ]);
+
+    this.historiaContent.set("constantino", [
+      {
+        page: 85,
+        line: 200,
+        text: "O imperador Constantino legalizou o cristianismo em 313 d.C. com o Edito de Milão.",
+        chapter: "Capítulo 4 - A Era de Constantino"
+      },
+      {
+        page: 86,
+        line: 205,
+        text: "A conversão de Constantino marcou uma nova era para o cristianismo no Império Romano.",
+        chapter: "Capítulo 4 - A Era de Constantino"
+      }
+    ]);
+
+    this.historiaContent.set("concílios", [
+      {
+        page: 95,
+        line: 220,
+        text: "Os concílios ecumênicos foram convocados para definir doutrinas fundamentais da fé cristã.",
+        chapter: "Capítulo 5 - Os Concílios da Igreja"
+      },
+      {
+        page: 96,
+        line: 225,
+        text: "O Concílio de Niceia (325 d.C.) afirmou a divindade de Cristo contra o arianismo.",
+        chapter: "Capítulo 5 - Os Concílios da Igreja"
+      }
+    ]);
+
+    this.historiaContent.set("monaquismo", [
+      {
+        page: 105,
+        line: 240,
+        text: "O movimento monástico surgiu como reação ao mundanismo crescente na Igreja.",
+        chapter: "Capítulo 6 - O Monaquismo"
+      },
+      {
+        page: 106,
+        line: 245,
+        text: "Os monges preservaram as Escrituras e o conhecimento cristão durante a Idade Média.",
+        chapter: "Capítulo 6 - O Monaquismo"
+      }
+    ]);
+
+    this.historiaContent.set("cisma", [
+      {
+        page: 150,
+        line: 350,
+        text: "O Grande Cisma de 1054 dividiu o cristianismo entre Oriente e Ocidente.",
+        chapter: "Capítulo 8 - O Grande Cisma"
+      },
+      {
+        page: 151,
+        line: 355,
+        text: "Diferenças teológicas e políticas levaram à separação entre as Igrejas Católica Romana e Ortodoxa.",
+        chapter: "Capítulo 8 - O Grande Cisma"
+      }
+    ]);
+
+    this.historiaContent.set("cruzadas", [
+      {
+        page: 165,
+        line: 380,
+        text: "As Cruzadas foram expedições militares que desviaram a Igreja de sua missão espiritual.",
+        chapter: "Capítulo 9 - As Cruzadas"
+      },
+      {
+        page: 166,
+        line: 385,
+        text: "O espírito das Cruzadas contradiz os ensinamentos pacíficos de Jesus Cristo.",
+        chapter: "Capítulo 9 - As Cruzadas"
+      }
+    ]);
+
+    this.historiaContent.set("inquisição", [
+      {
+        page: 200,
+        line: 450,
+        text: "A Inquisição representou um período sombrio de perseguição e intolerância religiosa.",
+        chapter: "Capítulo 11 - A Inquisição"
+      },
+      {
+        page: 201,
+        line: 455,
+        text: "Muitos verdadeiros cristãos foram perseguidos pela Inquisição por defenderem a verdade bíblica.",
+        chapter: "Capítulo 11 - A Inquisição"
+      }
+    ]);
+
+    this.historiaContent.set("waldenses", [
+      {
+        page: 180,
+        line: 410,
+        text: "Os valdenses foram precursores da Reforma, defendendo a autoridade das Escrituras.",
+        chapter: "Capítulo 10 - Movimentos Pré-Reforma"
+      },
+      {
+        page: 181,
+        line: 415,
+        text: "Pedro Valdo e seus seguidores pregavam a volta à simplicidade do cristianismo primitivo.",
+        chapter: "Capítulo 10 - Movimentos Pré-Reforma"
+      }
+    ]);
+
+    this.historiaContent.set("lutero", [
+      {
+        page: 285,
+        line: 500,
+        text: "Martinho Lutero foi usado por Deus para iniciar a Reforma Protestante em 1517.",
+        chapter: "Capítulo 15 - Martinho Lutero"
+      },
+      {
+        page: 286,
+        line: 505,
+        text: "As 95 Teses de Lutero atacaram os abusos da Igreja Católica Romana, especialmente a venda de indulgências.",
+        chapter: "Capítulo 15 - Martinho Lutero"
+      },
+      {
+        page: 287,
+        line: 510,
+        text: "Lutero redescobriu a doutrina bíblica da justificação pela fé somente.",
+        chapter: "Capítulo 15 - Martinho Lutero"
+      }
+    ]);
+
+    this.historiaContent.set("calvino", [
+      {
+        page: 295,
+        line: 520,
+        text: "João Calvino sistematizou a teologia reformada em suas Institutas da Religião Cristã.",
+        chapter: "Capítulo 16 - João Calvino"
+      },
+      {
+        page: 296,
+        line: 525,
+        text: "Calvino enfatizou a soberania de Deus e a autoridade absoluta das Escrituras.",
+        chapter: "Capítulo 16 - João Calvino"
+      }
+    ]);
+
+    this.historiaContent.set("anabatistas", [
+      {
+        page: 305,
+        line: 540,
+        text: "Os anabatistas defendiam o batismo por imersão de adultos convertidos.",
+        chapter: "Capítulo 17 - Os Anabatistas"
+      },
+      {
+        page: 306,
+        line: 545,
+        text: "Os anabatistas foram perseguidos tanto por católicos quanto por protestantes.",
+        chapter: "Capítulo 17 - Os Anabatistas"
+      }
+    ]);
   }
 
   async searchRelevantContent(question: string): Promise<BookReference[]> {
@@ -507,6 +830,28 @@ class PdfProcessor {
     if (question.includes("armas") || question.includes("guerra")) foundTerms.push("armas");
     if (question.includes("reino")) foundTerms.push("reino");
     if (question.includes("torment") || question.includes("sofr")) foundTerms.push("tormentos");
+    
+    // Termos do movimento pentecostal
+    if (question.includes("pentecost") || question.includes("movimento")) foundTerms.push("pentecostal");
+    if (question.includes("assembleia") || question.includes("assembl")) foundTerms.push("assembleia");
+    if (question.includes("brasil") || question.includes("berg") || question.includes("vingren")) foundTerms.push("brasil");
+    if (question.includes("don") || question.includes("língua") || question.includes("cura")) foundTerms.push("dons", "cura");
+    if (question.includes("avivament") || question.includes("azusa")) foundTerms.push("avivamento");
+    if (question.includes("evangelis") || question.includes("missõ")) foundTerms.push("evangelismo");
+    if (question.includes("persegui")) foundTerms.push("perseguição");
+    
+    // Termos da história do cristianismo
+    if (question.includes("igreja") || question.includes("primitiv")) foundTerms.push("igreja");
+    if (question.includes("constantino") || question.includes("edito")) foundTerms.push("constantino");
+    if (question.includes("concílio") || question.includes("niceia")) foundTerms.push("concílios");
+    if (question.includes("monge") || question.includes("monástic")) foundTerms.push("monaquismo");
+    if (question.includes("cisma") || question.includes("ortodox")) foundTerms.push("cisma");
+    if (question.includes("cruzada")) foundTerms.push("cruzadas");
+    if (question.includes("inquisiç")) foundTerms.push("inquisição");
+    if (question.includes("waldens") || question.includes("valdo")) foundTerms.push("waldenses");
+    if (question.includes("lutero") || question.includes("reforma")) foundTerms.push("lutero", "reforma");
+    if (question.includes("calvino")) foundTerms.push("calvino");
+    if (question.includes("anabatist") || question.includes("batismo")) foundTerms.push("anabatistas");
     
     return [...new Set(foundTerms)]; // Remove duplicates
   }
