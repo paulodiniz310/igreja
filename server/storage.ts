@@ -59,10 +59,11 @@ export class MemStorage implements IStorage {
   async updateSettings(insertSettings: InsertSettings): Promise<Settings> {
     this.settings = {
       id: this.currentSettingsId,
-      ...insertSettings,
+      apiKey: insertSettings.apiKey,
+      aiModel: insertSettings.aiModel || "deepseek/deepseek-r1-0528:free",
       updatedAt: new Date(),
     };
-    return this.settings;
+    return this.settings!;
   }
 }
 
