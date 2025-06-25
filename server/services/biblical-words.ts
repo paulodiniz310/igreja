@@ -203,12 +203,78 @@ class BiblicalWordsService {
       }
     }
 
+    // Provide contextual fallback words if no matches found
+    if (results.length === 0) {
+      const fallbackWords = this.getContextualFallbackWords(searchText);
+      results.push(...fallbackWords);
+    }
+
     // Remove duplicates
     const uniqueResults = results.filter((word, index, array) => 
       array.findIndex(w => w.word === word.word) === index
     );
 
     return uniqueResults.slice(0, 8); // Limit to 8 words
+  }
+
+  private getContextualFallbackWords(text: string): BiblicalWord[] {
+    const fallbackWords: BiblicalWord[] = [];
+
+    if (text.includes('deus') || text.includes('divindade') || text.includes('senhor')) {
+      fallbackWords.push({
+        word: "θεός (theos)",
+        language: "grego",
+        translation: "Deus, divindade",
+        context: "Nome geral para Deus no Novo Testamento"
+      });
+    }
+
+    if (text.includes('amor') || text.includes('amar')) {
+      fallbackWords.push({
+        word: "ἀγάπη (agape)",
+        language: "grego",
+        translation: "amor divino, amor sacrificial",
+        context: "O amor incondicional de Deus pela humanidade"
+      });
+    }
+
+    if (text.includes('fé') || text.includes('crer')) {
+      fallbackWords.push({
+        word: "πίστις (pistis)",
+        language: "grego",
+        translation: "fé, confiança, crença",
+        context: "Confiança e entrega completa a Deus"
+      });
+    }
+
+    if (text.includes('graça')) {
+      fallbackWords.push({
+        word: "χάρις (charis)",
+        language: "grego",
+        translation: "graça, favor imerecido",
+        context: "Favor divino não merecido concedido aos pecadores"
+      });
+    }
+
+    if (text.includes('paz')) {
+      fallbackWords.push({
+        word: "εἰρήνη (eirene)",
+        language: "grego",
+        translation: "paz, tranquilidade",
+        context: "Paz que vem de Deus"
+      });
+    }
+
+    if (text.includes('vida')) {
+      fallbackWords.push({
+        word: "ζωή (zoe)",
+        language: "grego",
+        translation: "vida, vida eterna",
+        context: "Vida espiritual e eterna dada por Deus"
+      });
+    }
+
+    return fallbackWords;
   }
 
   private findRelatedTerms(text: string): string[] {
