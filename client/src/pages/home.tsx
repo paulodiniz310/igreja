@@ -4,21 +4,23 @@ import QueryInput from "@/components/query-input";
 import ResponseDisplay from "@/components/response-display";
 import HistorySidebar from "@/components/history-sidebar";
 import SettingsModal from "@/components/settings-modal";
+import PWAInstall from "@/components/pwa-install";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalStorage } from "@/hooks/use-local-storage";
-import { History, Settings, Search } from "lucide-react";
+import { History, Settings, Search, RefreshCw } from "lucide-react";
+import type { Conversation, Settings as SettingsType } from "@/../../shared/schema";
 
 export default function Home() {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [currentResponse, setCurrentResponse] = useLocalStorage('currentResponse', null);
 
-  const { data: conversations } = useQuery({
+  const { data: conversations } = useQuery<Conversation[]>({
     queryKey: ['/api/conversations'],
   });
 
-  const { data: settings } = useQuery({
+  const { data: settings } = useQuery<SettingsType>({
     queryKey: ['/api/settings'],
   });
 
@@ -50,6 +52,15 @@ export default function Home() {
               <Button
                 variant="ghost"
                 size="sm"
+                onClick={() => setCurrentResponse(null)}
+                className="p-2 rounded-full hover:bg-primary-700 text-white"
+                title="Limpar conversa"
+              >
+                <RefreshCw className="h-5 w-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => setIsHistoryOpen(true)}
                 className="p-2 rounded-full hover:bg-primary-700 text-white"
               >
@@ -77,18 +88,21 @@ export default function Home() {
         )}
       </main>
 
+      {/* PWA Install Component */}
+      <PWAInstall />
+
       {/* Sidebar and Modal */}
       <HistorySidebar
         isOpen={isHistoryOpen}
         onClose={() => setIsHistoryOpen(false)}
-        conversations={conversations || []}
+        conversations={(conversations as Conversation[]) || []}
         onSelectConversation={setCurrentResponse}
       />
 
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
-        settings={settings}
+        settings={(settings as SettingsType) || undefined}
       />
 
       {/* Bottom Navigation (Mobile) */}
@@ -99,6 +113,13 @@ export default function Home() {
               <path d="M12 2L2 7v10c0 5.55 3.84 9.69 9 11 5.16-1.31 9-5.45 9-11V7l-10-5z"/>
             </svg>
             <span className="text-xs mt-1">Início</span>
+          </button>
+          <button 
+            onClick={() => setCurrentResponse(null)}
+            className="flex flex-col items-center p-2 text-gray-500"
+          >
+            <RefreshCw className="h-6 w-6" />
+            <span className="text-xs mt-1">Limpar</span>
           </button>
           <button 
             onClick={() => setIsHistoryOpen(true)}
