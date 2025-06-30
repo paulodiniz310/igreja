@@ -84,10 +84,14 @@ The application is built as a modern web application with a React frontend and E
 - Database migrations handled through Drizzle Kit
 
 ### Production
-- Autoscale deployment target on Replit
+- **Primary Target**: Render.com deployment
+  - PostgreSQL database with Neon/Render
+  - Web service with Node.js environment
+  - Environment variables: NODE_ENV, DATABASE_URL, OPENROUTER_API_KEY
+- **Alternative**: Autoscale deployment target on Replit
 - Frontend built and served as static assets
 - Backend compiled with esbuild for optimal performance
-- Environment variables for database URL and API keys
+- Port configuration: Uses process.env.PORT for Render compatibility
 
 ### Build Process
 1. Frontend assets built with Vite to `dist/public`
@@ -96,8 +100,12 @@ The application is built as a modern web application with a React frontend and E
 
 ## Changelog
 
-Changelog:
-- June 25, 2025. Initial setup
+- June 30, 2025: Preparação para deploy no Render
+  - Configurado endpoint /health para monitoramento
+  - Ajustada configuração de porta para usar process.env.PORT
+  - Criados arquivos render.yaml, RENDER_SETUP.md e DEPLOY_RENDER.md
+  - Melhoradas exibições de palavras originais e referências da Declaração de Fé
+- June 25, 2025: Initial setup
 
 ## User Preferences
 
