@@ -24,19 +24,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Process the query through multiple services
-      const [aiResponse, pdfContent, biblicalWords] = await Promise.all([
+      const [aiResponse, pdfContent] = await Promise.all([
         openRouterService.query(question, responseLevel, settings.apiKey, settings.aiModel),
-        pdfProcessor.searchRelevantContent(question),
-        biblicalWordsService.findOriginalWords(question)
+        pdfProcessor.searchRelevantContent(question)
       ]);
+
+      // Enhanced original words processing - extract keywords from question and AI response
+      const allText = `${question} ${aiResponse.explanation} ${aiResponse.verses.map(v => v.text).join(' ')}`;
+      const biblicalWords = await biblicalWordsService.findOriginalWords(allText);
 
       // Enhance verses with original text
       const enhancedVerses = await biblicalTextService.enhanceVersesWithOriginal(aiResponse.verses);
+      
+      // Convert null to undefined for TypeScript compatibility
+      const compatibleVerses = enhancedVerses.map(verse => ({
+        text: verse.text,
+        reference: verse.reference,
+        explanation: verse.explanation,
+        originalText: verse.originalText ? verse.originalText : undefined
+      }));
 
       // Structure the biblical response
       const response: BiblicalResponse = {
         adExplanation: aiResponse.explanation,
-        verses: enhancedVerses,
+        verses: compatibleVerses,
         originalWords: biblicalWords,
         bookReferences: pdfContent,
         aiComplement: aiResponse.complement

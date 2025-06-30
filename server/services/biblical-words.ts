@@ -13,34 +13,67 @@ class BiblicalWordsService {
   }
 
   private initializeWordDatabase() {
-    // Greek words
+    // Palavras sobre Graça e Favor Divino
     this.wordDatabase.set("graça", [
       {
         word: "χάρις (charis)",
         language: "grego",
         translation: "graça, favor, benevolência divina, dom gracioso",
         context: "Usado em Efésios 2:8 para descrever o favor imerecido de Deus"
+      },
+      {
+        word: "חן (chen)",
+        language: "hebraico",
+        translation: "graça, favor, charme",
+        context: "Favor divino encontrado no Antigo Testamento"
       }
     ]);
 
+    // Palavras sobre Salvação e Libertação
     this.wordDatabase.set("salvação", [
       {
         word: "σωτηρία (soteria)",
         language: "grego",
         translation: "salvação, libertação, preservação, segurança",
         context: "Conceito central da doutrina cristã, libertação do pecado"
+      },
+      {
+        word: "יְשׁוּעָה (yeshuah)",
+        language: "hebraico",
+        translation: "salvação, libertação, vitória",
+        context: "Livramento divino, especialmente messiânico"
+      },
+      {
+        word: "σῶζω (sozo)",
+        language: "grego",
+        translation: "salvar, curar, preservar, resgatar",
+        context: "Verbo usado para salvação física e espiritual"
       }
     ]);
 
+    // Palavras sobre Fé e Confiança
     this.wordDatabase.set("fé", [
       {
         word: "πίστις (pistis)",
         language: "grego",
         translation: "fé, confiança, crença, fidelidade",
         context: "Confiança e dependência completa em Deus e Sua palavra"
+      },
+      {
+        word: "אֱמוּנָה (emunah)",
+        language: "hebraico",
+        translation: "fé, fidelidade, firmeza, confiança",
+        context: "Confiança firme e inabalável em Deus"
+      },
+      {
+        word: "πιστεύω (pisteuo)",
+        language: "grego",
+        translation: "crer, confiar, ter fé",
+        context: "Ato de colocar confiança em Deus"
       }
     ]);
 
+    // Palavras sobre Espírito
     this.wordDatabase.set("espírito", [
       {
         word: "πνεῦμα (pneuma)",
@@ -54,9 +87,15 @@ class BiblicalWordsService {
         translation: "vento, respiração, espírito, força vital",
         context: "Força vital de Deus, sopro divino que dá vida"
       },
-
+      {
+        word: "נְשָׁמָה (neshamah)",
+        language: "hebraico",
+        translation: "respiração, fôlego, alma",
+        context: "Fôlego de vida soprado por Deus no homem"
+      }
     ]);
 
+    // Palavras sobre Amor
     this.wordDatabase.set("amor", [
       {
         word: "ἀγάπη (agape)",
@@ -69,9 +108,22 @@ class BiblicalWordsService {
         language: "hebraico",
         translation: "amor, afeição profunda",
         context: "Amor comprometido e escolha deliberada de amar"
+      },
+      {
+        word: "φιλέω (phileo)",
+        language: "grego",
+        translation: "amar, gostar, ter afeição",
+        context: "Amor fraternal e amizade"
+      },
+      {
+        word: "חֶסֶד (chesed)",
+        language: "hebraico",
+        translation: "amor leal, bondade, misericórdia",
+        context: "Amor fiel baseado em aliança"
       }
     ]);
 
+    // Palavras sobre Pecado e Transgressão
     this.wordDatabase.set("pecado", [
       {
         word: "ἁμαρτία (hamartia)",
@@ -84,6 +136,24 @@ class BiblicalWordsService {
         language: "hebraico",
         translation: "pecar, errar, falhar",
         context: "Falhar em atingir o padrão divino, transgredir"
+      },
+      {
+        word: "עָוֹן (avon)",
+        language: "hebraico",
+        translation: "iniquidade, culpa, perversidade",
+        context: "Pecado com aspecto de culpa e distorção moral"
+      },
+      {
+        word: "פֶּשַׁע (pesha)",
+        language: "hebraico",
+        translation: "transgressão, rebelião, revolta",
+        context: "Rebelião deliberada contra Deus"
+      },
+      {
+        word: "παράπτωμα (paraptoma)",
+        language: "grego",
+        translation: "transgressão, queda, deslize",
+        context: "Ato de cair ou desviar do caminho correto"
       }
     ]);
 
@@ -237,6 +307,335 @@ class BiblicalWordsService {
         language: "grego",
         translation: "santificação, consagração",
         context: "Processo de separação para Deus e purificação"
+      },
+      {
+        word: "קָדוֹשׁ (qadosh)",
+        language: "hebraico",
+        translation: "santo, sagrado, separado",
+        context: "Separado para Deus, distinto do comum"
+      }
+    ]);
+
+    // Palavras sobre Vida e Eternidade
+    this.wordDatabase.set("vida", [
+      {
+        word: "ζωή (zoe)",
+        language: "grego",
+        translation: "vida, vida eterna",
+        context: "Vida espiritual e eterna dada por Deus"
+      },
+      {
+        word: "βίος (bios)",
+        language: "grego",
+        translation: "vida física, existência terrena",
+        context: "Vida temporal e material"
+      },
+      {
+        word: "חַיִּים (chayyim)",
+        language: "hebraico",
+        translation: "vida, vivos",
+        context: "Vida como dádiva de Deus"
+      },
+      {
+        word: "נֶפֶשׁ (nephesh)",
+        language: "hebraico",
+        translation: "alma, vida, ser vivente",
+        context: "Totalidade do ser humano"
+      }
+    ]);
+
+    // Palavras sobre Morte e Ressurreição
+    this.wordDatabase.set("morte", [
+      {
+        word: "θάνατος (thanatos)",
+        language: "grego",
+        translation: "morte, separação",
+        context: "Separação física e espiritual"
+      },
+      {
+        word: "מָוֶת (mavet)",
+        language: "hebraico",
+        translation: "morte, fim da vida",
+        context: "Fim da existência terrena"
+      }
+    ]);
+
+    this.wordDatabase.set("ressurreição", [
+      {
+        word: "ἀνάστασις (anastasis)",
+        language: "grego",
+        translation: "ressurreição, levantamento",
+        context: "Ato de levantar dos mortos"
+      },
+      {
+        word: "תְּחִיָּה (techiyah)",
+        language: "hebraico",
+        translation: "reviver, ressuscitação",
+        context: "Restauração da vida"
+      }
+    ]);
+
+    // Palavras sobre Reino e Céu
+    this.wordDatabase.set("reino", [
+      {
+        word: "βασιλεία (basileia)",
+        language: "grego",
+        translation: "reino, reinado, soberania",
+        context: "Reino de Deus e sua autoridade"
+      },
+      {
+        word: "מַלְכוּת (malchut)",
+        language: "hebraico",
+        translation: "reino, reinado, soberania",
+        context: "Governo e autoridade divina"
+      }
+    ]);
+
+    this.wordDatabase.set("céu", [
+      {
+        word: "οὐρανός (ouranos)",
+        language: "grego",
+        translation: "céu, céus, firmamento",
+        context: "Habitação de Deus e destino dos salvos"
+      },
+      {
+        word: "שָׁמַיִם (shamayim)",
+        language: "hebraico",
+        translation: "céus, firmamento",
+        context: "Morada divina e espaço celestial"
+      }
+    ]);
+
+    // Palavras sobre Justiça e Julgamento
+    this.wordDatabase.set("justiça", [
+      {
+        word: "δικαιοσύνη (dikaiosyne)",
+        language: "grego",
+        translation: "justiça, retidão",
+        context: "Justiça imputada por Deus ao crente"
+      },
+      {
+        word: "צְדָקָה (tsedaqah)",
+        language: "hebraico",
+        translation: "justiça, retidão, caridade",
+        context: "Fazer o que é certo diante de Deus"
+      }
+    ]);
+
+    this.wordDatabase.set("julgamento", [
+      {
+        word: "κρίσις (krisis)",
+        language: "grego",
+        translation: "julgamento, juízo, decisão",
+        context: "Avaliação divina das ações humanas"
+      },
+      {
+        word: "מִשְׁפָּט (mishpat)",
+        language: "hebraico",
+        translation: "julgamento, justiça, direito",
+        context: "Decisão judicial divina"
+      }
+    ]);
+
+    // Palavras sobre Profecia e Revelação
+    this.wordDatabase.set("profecia", [
+      {
+        word: "προφητεία (propheteia)",
+        language: "grego",
+        translation: "profecia, predição, revelação",
+        context: "Mensagem divina através do profeta"
+      },
+      {
+        word: "נְבוּאָה (nevuah)",
+        language: "hebraico",
+        translation: "profecia, palavra profética",
+        context: "Revelação divina através do profeta"
+      }
+    ]);
+
+    this.wordDatabase.set("revelação", [
+      {
+        word: "ἀποκάλυψις (apokalypsis)",
+        language: "grego",
+        translation: "revelação, manifestação, descobrimento",
+        context: "Manifestação divina da verdade"
+      },
+      {
+        word: "גִּלּוּי (gilluy)",
+        language: "hebraico",
+        translation: "revelação, descobrimento",
+        context: "Revelação de mistérios divinos"
+      }
+    ]);
+
+    // Palavras sobre Dons Espirituais
+    this.wordDatabase.set("dons", [
+      {
+        word: "χάρισμα (charisma)",
+        language: "grego",
+        translation: "dom da graça, presente espiritual",
+        context: "Dons concedidos pelo Espírito Santo"
+      },
+      {
+        word: "δῶρον (doron)",
+        language: "grego",
+        translation: "dádiva, presente, oferta",
+        context: "Presente divino aos crentes"
+      },
+      {
+        word: "מַתָּנָה (mattanah)",
+        language: "hebraico",
+        translation: "presente, dádiva",
+        context: "Dom concedido por Deus"
+      }
+    ]);
+
+    // Palavras sobre Cura e Milagres
+    this.wordDatabase.set("cura", [
+      {
+        word: "ἴασις (iasis)",
+        language: "grego",
+        translation: "cura, restauração",
+        context: "Cura física e espiritual"
+      },
+      {
+        word: "θεραπεία (therapeia)",
+        language: "grego",
+        translation: "cura, tratamento, serviço",
+        context: "Ato de curar e restaurar"
+      },
+      {
+        word: "רְפוּאָה (refuah)",
+        language: "hebraico",
+        translation: "cura, medicina, saúde",
+        context: "Restauração da saúde por Deus"
+      }
+    ]);
+
+    this.wordDatabase.set("milagre", [
+      {
+        word: "σημεῖον (semeion)",
+        language: "grego",
+        translation: "sinal, milagre, prodígio",
+        context: "Sinal divino que aponta para Deus"
+      },
+      {
+        word: "δύναμις (dynamis)",
+        language: "grego",
+        translation: "poder, força, milagre",
+        context: "Poder sobrenatural de Deus"
+      },
+      {
+        word: "אוֹת (ot)",
+        language: "hebraico",
+        translation: "sinal, marca, prodígio",
+        context: "Sinal divino de confirmação"
+      }
+    ]);
+
+    // Palavras sobre Guerra Espiritual
+    this.wordDatabase.set("guerra", [
+      {
+        word: "πόλεμος (polemos)",
+        language: "grego",
+        translation: "guerra, batalha, conflito",
+        context: "Guerra espiritual contra as trevas"
+      },
+      {
+        word: "מִלְחָמָה (milchamah)",
+        language: "hebraico",
+        translation: "guerra, batalha, luta",
+        context: "Conflito espiritual"
+      }
+    ]);
+
+    this.wordDatabase.set("vitória", [
+      {
+        word: "νῖκος (nikos)",
+        language: "grego",
+        translation: "vitória, conquista",
+        context: "Vitória em Cristo sobre o pecado"
+      },
+      {
+        word: "תְּשׁוּעָה (teshuah)",
+        language: "hebraico",
+        translation: "salvação, vitória, libertação",
+        context: "Vitória divina concedida ao povo"
+      }
+    ]);
+
+    // Palavras sobre Aliança e Testamento
+    this.wordDatabase.set("aliança", [
+      {
+        word: "διαθήκη (diatheke)",
+        language: "grego",
+        translation: "aliança, testamento, pacto",
+        context: "Acordo solene entre Deus e seu povo"
+      },
+      {
+        word: "בְּרִית (berit)",
+        language: "hebraico",
+        translation: "aliança, pacto, acordo",
+        context: "Pacto estabelecido por Deus"
+      }
+    ]);
+
+    // Palavras sobre Adoração e Louvor
+    this.wordDatabase.set("louvor", [
+      {
+        word: "αἶνος (ainos)",
+        language: "grego",
+        translation: "louvor, elogio, glória",
+        context: "Expressão de admiração a Deus"
+      },
+      {
+        word: "תְּהִלָּה (tehillah)",
+        language: "hebraico",
+        translation: "louvor, glória, cântico",
+        context: "Expressão de exaltação a Deus"
+      },
+      {
+        word: "הַלְלוּיָהּ (hallelujah)",
+        language: "hebraico",
+        translation: "louvai ao Senhor",
+        context: "Expressão de adoração e exaltação"
+      }
+    ]);
+
+    // Palavras sobre Tempo e Eternidade
+    this.wordDatabase.set("tempo", [
+      {
+        word: "χρόνος (chronos)",
+        language: "grego",
+        translation: "tempo cronológico, duração",
+        context: "Tempo sequencial e mensurável"
+      },
+      {
+        word: "καιρός (kairos)",
+        language: "grego",
+        translation: "tempo oportuno, momento apropriado",
+        context: "Tempo de Deus, momento divino"
+      },
+      {
+        word: "עֵת (et)",
+        language: "hebraico",
+        translation: "tempo, estação, período",
+        context: "Tempo determinado por Deus"
+      }
+    ]);
+
+    this.wordDatabase.set("eternidade", [
+      {
+        word: "αἰώνιος (aionios)",
+        language: "grego",
+        translation: "eterno, perpétuo, duradouro",
+        context: "Qualidade da vida divina"
+      },
+      {
+        word: "עוֹלָם (olam)",
+        language: "hebraico",
+        translation: "eternidade, mundo, era",
+        context: "Tempo sem fim, eternidade"
       }
     ]);
   }
@@ -338,35 +737,81 @@ class BiblicalWordsService {
 
   private findRelatedTerms(text: string): string[] {
     const relatedTerms: string[] = [];
+    const lowerText = text.toLowerCase();
 
     // Salvation-related terms
-    if (text.includes("salv") || text.includes("redençã") || text.includes("perdã")) {
-      relatedTerms.push("salvação", "graça", "fé");
+    if (lowerText.includes("salv") || lowerText.includes("redençã") || lowerText.includes("perdã") || lowerText.includes("liberta")) {
+      relatedTerms.push("salvação", "graça", "fé", "vida");
     }
 
     // Spirit-related terms
-    if (text.includes("espírit") || text.includes("pneuma") || text.includes("vento")) {
-      relatedTerms.push("espírito");
+    if (lowerText.includes("espírit") || lowerText.includes("pneuma") || lowerText.includes("vento") || lowerText.includes("consolador")) {
+      relatedTerms.push("espírito", "dons");
     }
 
     // Love-related terms
-    if (text.includes("amor") || text.includes("caridad")) {
-      relatedTerms.push("amor");
+    if (lowerText.includes("amor") || lowerText.includes("caridad") || lowerText.includes("misericórd")) {
+      relatedTerms.push("amor", "graça", "paz");
     }
 
     // Jesus-related terms
-    if (text.includes("jesus") || text.includes("cristo") || text.includes("messias")) {
-      relatedTerms.push("jesus", "cristo");
+    if (lowerText.includes("jesus") || lowerText.includes("cristo") || lowerText.includes("messias") || lowerText.includes("salvador")) {
+      relatedTerms.push("jesus", "cristo", "salvação", "ressurreição");
     }
 
     // Baptism-related terms
-    if (text.includes("batiz") || text.includes("imers")) {
-      relatedTerms.push("batismo");
+    if (lowerText.includes("batiz") || lowerText.includes("imers") || lowerText.includes("águas")) {
+      relatedTerms.push("batismo", "santificação");
     }
 
     // Church-related terms
-    if (text.includes("igreja") || text.includes("congregaç")) {
-      relatedTerms.push("igreja");
+    if (lowerText.includes("igreja") || lowerText.includes("congregaç") || lowerText.includes("assembleia")) {
+      relatedTerms.push("igreja", "adoração", "louvor");
+    }
+
+    // Prophecy-related terms
+    if (lowerText.includes("profec") || lowerText.includes("visão") || lowerText.includes("sonho")) {
+      relatedTerms.push("profecia", "revelação", "dons");
+    }
+
+    // Healing-related terms
+    if (lowerText.includes("cur") || lowerText.includes("sará") || lowerText.includes("restaur") || lowerText.includes("saúde")) {
+      relatedTerms.push("cura", "milagre", "dons");
+    }
+
+    // Spiritual warfare terms
+    if (lowerText.includes("guerr") || lowerText.includes("bat") || lowerText.includes("demôn") || lowerText.includes("satan")) {
+      relatedTerms.push("guerra", "vitória", "oração");
+    }
+
+    // Death and eternal life terms
+    if (lowerText.includes("mort") || lowerText.includes("eternal") || lowerText.includes("vida eterna")) {
+      relatedTerms.push("morte", "vida", "ressurreição", "eternidade");
+    }
+
+    // Justice and judgment terms
+    if (lowerText.includes("just") || lowerText.includes("julgam") || lowerText.includes("juízo")) {
+      relatedTerms.push("justiça", "julgamento", "pecado");
+    }
+
+    // Heaven and kingdom terms
+    if (lowerText.includes("céu") || lowerText.includes("reino") || lowerText.includes("paraíso")) {
+      relatedTerms.push("céu", "reino", "eternidade");
+    }
+
+    // Prayer and worship terms
+    if (lowerText.includes("oraç") || lowerText.includes("ador") || lowerText.includes("louv")) {
+      relatedTerms.push("oração", "adoração", "louvor", "santificação");
+    }
+
+    // Covenant and law terms
+    if (lowerText.includes("alianç") || lowerText.includes("pacto") || lowerText.includes("testament")) {
+      relatedTerms.push("aliança", "fé", "graça");
+    }
+
+    // Time and prophecy terms
+    if (lowerText.includes("tempo") || lowerText.includes("último") || lowerText.includes("fim")) {
+      relatedTerms.push("tempo", "profecia", "julgamento");
     }
 
     return relatedTerms;
