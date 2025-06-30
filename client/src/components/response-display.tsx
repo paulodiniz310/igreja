@@ -84,14 +84,6 @@ export default function ResponseDisplay({ response: data }: ResponseDisplayProps
                       <blockquote className="text-gray-800 italic mb-2">
                         "{verse.text}"
                       </blockquote>
-                      {verse.originalText && (
-                        <div className="bg-gray-50 p-2 rounded mt-2 mb-2">
-                          <p className="text-xs text-gray-500 mb-1">Texto Original:</p>
-                          <p className="text-sm font-mono text-gray-700 leading-relaxed">
-                            {verse.originalText}
-                          </p>
-                        </div>
-                      )}
                       <cite className="text-sm font-semibold text-primary-600">{verse.reference}</cite>
                       <p className="text-sm text-gray-600 mt-2">
                         <strong>Explicação:</strong> {verse.explanation}
