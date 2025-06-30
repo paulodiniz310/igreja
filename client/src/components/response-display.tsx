@@ -21,7 +21,6 @@ export default function ResponseDisplay({ response: data }: ResponseDisplayProps
   const { toast } = useToast();
   const { conversation, response } = data;
 
-
   return (
     <div className="space-y-4">
       {/* Question Asked */}
@@ -85,23 +84,31 @@ export default function ResponseDisplay({ response: data }: ResponseDisplayProps
               Palavras no Idioma Original
             </h3>
             
-            <div className="space-y-3">
+            <div className="space-y-4">
               {response.originalWords.map((word, index) => (
-                <div key={index} className="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
-                  <div className="flex-shrink-0">
+                <div key={index} className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4 border border-gray-200">
+                  <div className="flex items-start space-x-3">
                     <Badge 
-                      variant={word.language === "grego" ? "default" : "secondary"}
-                      className="capitalize"
+                      variant={word.language === "grego" ? "default" : word.language === "hebraico" ? "secondary" : "outline"}
+                      className="capitalize font-medium mt-1"
                     >
                       {word.language}
                     </Badge>
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-semibold text-gray-900">{word.word}</p>
-                    <p className="text-sm text-gray-600">
-                      <strong>Tradução:</strong> {word.translation}
-                    </p>
-                    <p className="text-xs text-gray-500">{word.context}</p>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <p className="font-bold text-lg text-gray-900">{word.word}</p>
+                        <span className="text-gray-400">•</span>
+                        <p className="text-sm font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                          {word.translation?.split(',')[0]?.trim() || word.translation}
+                        </p>
+                      </div>
+                      <p className="text-sm text-gray-700 mb-2">
+                        <span className="font-semibold">Tradução:</span> {word.translation}
+                      </p>
+                      <p className="text-sm text-gray-600 italic">
+                        {word.context}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -110,30 +117,34 @@ export default function ResponseDisplay({ response: data }: ResponseDisplayProps
         </Card>
       )}
 
-      {/* Book References */}
+      {/* Book References - Declaração de Fé */}
       {response.bookReferences && response.bookReferences.length > 0 && (
         <Card className="bg-white shadow-md">
           <CardContent className="p-6">
             <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
               <FileText className="text-green-600 mr-2" size={20} />
-              Referências dos Livros
+              Referências da Declaração de Fé - Assembleia de Deus
             </h3>
             
             <div className="space-y-4">
               {response.bookReferences.map((ref, index) => (
-                <div key={index} className="border-l-4 border-green-500 pl-4 py-2">
-                  <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-semibold text-gray-800">{ref.bookTitle}</h4>
-                    <Badge variant="outline" className="bg-green-50 text-green-800">
-                      Página {ref.page}
-                    </Badge>
+                <div key={index} className="border-l-4 border-green-500 pl-4 py-3 bg-green-50 rounded-r-lg">
+                  <div className="mb-2">
+                    <h4 className="font-semibold text-green-800 text-sm">
+                      {ref.bookTitle}
+                    </h4>
+                    {ref.chapter && (
+                      <p className="text-xs text-green-600 mt-1">{ref.chapter}</p>
+                    )}
                   </div>
-                  <blockquote className="text-gray-700 italic text-sm mb-2">
+                  <blockquote className="text-gray-700 italic text-sm leading-relaxed">
                     "{ref.quote}"
                   </blockquote>
-                  <p className="text-xs text-gray-500">
-                    <strong>Local:</strong> {ref.chapter || `Linha ${ref.line}`}
-                  </p>
+                  <div className="flex items-center justify-between mt-2">
+                    <span className="text-xs text-gray-500">
+                      Página {ref.page}, Linha {ref.line}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -141,24 +152,36 @@ export default function ResponseDisplay({ response: data }: ResponseDisplayProps
         </Card>
       )}
 
-      {/* AI Complement */}
+      {/* AI Complement - Melhorado e Organizado */}
       {response.aiComplement && (
-        <Card className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 shadow-md">
+        <Card className="bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 border-2 border-purple-200 shadow-lg">
           <CardContent className="p-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
-              <Bot className="text-purple-600 mr-2" size={20} />
-              Complemento da IA
+            <h3 className="text-xl font-bold text-purple-800 mb-4 flex items-center">
+              <Bot className="text-purple-600 mr-3" size={24} />
+              Complemento e Aplicação Prática
             </h3>
-            <div className="text-gray-700 text-sm leading-relaxed">
-              <p>{response.aiComplement}</p>
+            <div className="bg-white rounded-lg p-5 border border-purple-100 shadow-sm">
+              <div className="prose prose-sm max-w-none text-gray-700 leading-relaxed">
+                {response.aiComplement.split('\n\n').map((paragraph, index) => (
+                  <div key={index} className="mb-4">
+                    {paragraph.includes(':') && paragraph.length < 100 ? (
+                      <h4 className="font-semibold text-purple-700 mb-2 border-b border-purple-200 pb-1">
+                        {paragraph}
+                      </h4>
+                    ) : (
+                      <p className="text-gray-700 leading-relaxed">{paragraph}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 flex items-center space-x-2 text-xs text-purple-600">
+              <Bot size={14} />
+              <span>Orientação baseada na tradição pentecostal da Assembleia de Deus</span>
             </div>
           </CardContent>
         </Card>
       )}
-
-
-
-
     </div>
   );
 }
