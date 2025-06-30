@@ -528,6 +528,84 @@ class PdfProcessor {
 
     return results;
   }
+
+  async getFullChapterContent(chapter: string): Promise<string> {
+    // Map of chapter names to full content
+    const chapterContent: { [key: string]: string } = {
+      "Capítulo I - Sobre as Sagradas Escrituras": `
+CAPÍTULO I. SOBRE AS SAGRADAS ESCRITURAS
+
+1. Estrutura
+A Bíblia Sagrada é composta de 66 livros canônicos, sendo 39 do Antigo Testamento e 27 do Novo Testamento.
+
+2. Classificação
+As Escrituras se dividem em: Lei, História, Poesia, Profecia Maior, Profecia Menor (AT) e Evangelhos, História, Epístolas Paulinas, Epístolas Gerais, Profecia (NT).
+
+3. Propósito
+A Bíblia Sagrada é a única regra infalível de fé normativa para a vida e o caráter cristão. É a Palavra de Deus escrita para instrução, correção e edificação dos crentes.
+
+4. O poder da Palavra de Deus
+A Palavra de Deus é viva e eficaz, mais cortante que qualquer espada de dois gumes, penetrando até a divisão da alma e do espírito.
+
+5. Os livros apócrifos e pseudoepígrafos
+Rejeitamos os livros apócrifos e pseudoepígrafos por não serem canônicos nem inspirados por Deus.
+
+6. Mensagem
+A mensagem central das Escrituras é Jesus Cristo, revelado desde Gênesis até Apocalipse como o Salvador da humanidade.
+      `,
+      
+      "Capítulo II - Sobre Deus": `
+CAPÍTULO II. SOBRE DEUS
+
+Cremos em um só Deus, eternamente subsistente em três pessoas: o Pai, o Filho e o Espírito Santo.
+
+1. Sobre os atributos naturais
+Deus é Espírito, eterno, imutável, onipresente, onisciente e onipotente.
+
+2. Sobre os atributos morais
+Deus é santo, justo, amoroso, misericordioso, longânimo e fiel.
+
+3. Sobre os atributos de poder
+Deus é Todo-Poderoso, Criador e Sustentador de todas as coisas, soberano sobre toda a criação.
+
+4. Sobre o nome "Deus"
+O nome "Deus" designa o Ser Supremo, único, verdadeiro e digno de toda adoração.
+
+5. Sobre outros nomes de Deus
+Deus se revela por diversos nomes: Jeová, El Shaddai, Adonai, cada um revelando aspectos de Sua natureza.
+
+6. Sobre as obras de Deus
+Deus é o Criador de todas as coisas, o Sustentador do universo e o Redentor da humanidade.
+      `,
+      
+      "Capítulo VIII - Sobre as Criaturas Espirituais": `
+CAPÍTULO VIII. SOBRE AS CRIATURAS ESPIRITUAIS
+
+1. Seus nomes
+Os anjos são chamados de mensageiros, ministros, espíritos ministradores, santos, filhos de Deus.
+
+2. Sua natureza
+Os anjos são seres espirituais criados por Deus, dotados de inteligência, vontade e poder, mas não são onipresentes nem oniscientes.
+
+3. Seus ofícios
+Os anjos servem a Deus como mensageiros, executores de Sua vontade, protetores dos justos e adoradores eternos.
+
+4. O anjo da guarda
+Cada crente tem um anjo designado por Deus para sua proteção e ministério espiritual.
+
+5. A organização angelical
+Existem hierarquias angelicais: serafins, querubins, arcanjos, principados, potestades, dominações.
+
+6. Os anjos decaídos
+Alguns anjos se rebelaram contra Deus sob a liderança de Satanás e foram expulsos do céu.
+
+7. O maioral dos demônios
+Satanás é o líder dos anjos caídos, inimigo de Deus e dos homens, mas já foi derrotado por Cristo na cruz.
+      `
+    };
+
+    return chapterContent[chapter] || "Conteúdo não encontrado para este capítulo.";
+  }
 }
 
 export const pdfProcessor = new PdfProcessor();

@@ -32,15 +32,21 @@ export const api = {
     return await response.json();
   },
 
-  // Generate image based on prompt
-  async generateImage(prompt: string) {
-    const response = await apiRequest("POST", "/api/generate-image", { prompt });
+  // Get original words for a term
+  async getOriginalWords(term: string) {
+    const response = await apiRequest("POST", "/api/original-words", { term });
     return await response.json();
   },
 
   // Search in Declaração de Fé book
   async searchDeclaracao(term: string) {
     const response = await apiRequest("POST", "/api/search-declaracao", { term });
+    return await response.json();
+  },
+
+  // Get full reference content
+  async getReferenceContent(chapter: string) {
+    const response = await apiRequest("POST", "/api/get-reference-content", { chapter });
     return await response.json();
   },
 };
