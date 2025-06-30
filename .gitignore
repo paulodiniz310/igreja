@@ -4,3 +4,8 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+# Ignorar arquivos grandes
+project-zip/
+attached_assets/
+*.pdf
+*.zip
