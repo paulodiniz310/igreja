@@ -51,9 +51,10 @@ class BiblicalWordsService {
       {
         word: "רוח (ruach)",
         language: "hebraico",
-        translation: "espírito, vento, sopro, fôlego",
-        context: "Termo do Antigo Testamento para espírito e vento de Deus"
-      }
+        translation: "vento, respiração, espírito, força vital",
+        context: "Força vital de Deus, sopro divino que dá vida"
+      },
+
     ]);
 
     this.wordDatabase.set("amor", [
@@ -62,6 +63,63 @@ class BiblicalWordsService {
         language: "grego",
         translation: "amor divino, amor incondicional",
         context: "O amor de Deus pelos homens e o amor cristão ao próximo"
+      },
+      {
+        word: "אהבה (ahavah)",
+        language: "hebraico",
+        translation: "amor, afeição profunda",
+        context: "Amor comprometido e escolha deliberada de amar"
+      }
+    ]);
+
+    this.wordDatabase.set("pecado", [
+      {
+        word: "ἁμαρτία (hamartia)",
+        language: "grego",
+        translation: "pecado, erro, transgressão",
+        context: "Errar o alvo, falhar em atingir o padrão de Deus"
+      },
+      {
+        word: "חטא (chata)",
+        language: "hebraico",
+        translation: "pecar, errar, falhar",
+        context: "Falhar em atingir o padrão divino, transgredir"
+      }
+    ]);
+
+    this.wordDatabase.set("anjo", [
+      {
+        word: "ἄγγελος (angelos)",
+        language: "grego",
+        translation: "mensageiro, anjo",
+        context: "Ser celestial enviado por Deus como mensageiro"
+      },
+      {
+        word: "מלאך (malak)",
+        language: "hebraico",
+        translation: "mensageiro, anjo",
+        context: "Enviado divino, mensageiro de Deus"
+      }
+    ]);
+
+    this.wordDatabase.set("deus", [
+      {
+        word: "θεός (theos)",
+        language: "grego",
+        translation: "Deus, divindade",
+        context: "O Deus único, criador e sustentador do universo"
+      },
+      {
+        word: "אלהים (Elohim)",
+        language: "hebraico",
+        translation: "Deus, seres divinos",
+        context: "Nome plural de majestade para o Deus único"
+      },
+      {
+        word: "יהוה (YHWH)",
+        language: "hebraico",
+        translation: "Jeová, Senhor",
+        context: "Nome sagrado e pessoal de Deus revelado a Moisés"
       }
     ]);
 
@@ -188,7 +246,8 @@ class BiblicalWordsService {
     const searchText = text.toLowerCase();
 
     // Search for exact matches
-    for (const [key, words] of this.wordDatabase.entries()) {
+    const entries = Array.from(this.wordDatabase.entries());
+    for (const [key, words] of entries) {
       if (searchText.includes(key)) {
         results.push(...words);
       }

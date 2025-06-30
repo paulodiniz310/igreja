@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useMutation } from "@tanstack/react-query";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { Church, BookOpen, Languages, FileText, Bot, Image as ImageIcon } from "lucide-react";
+import { api } from "@/lib/api";
+import { Church, BookOpen, Languages, FileText, Bot, Eye } from "lucide-react";
 import type { BiblicalResponse } from "@shared/schema";
 
 interface ResponseDisplayProps {
@@ -17,30 +20,44 @@ interface ResponseDisplayProps {
 export default function ResponseDisplay({ response: data }: ResponseDisplayProps) {
   const { toast } = useToast();
   const { conversation, response } = data;
+  const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
+  const [originalWordsData, setOriginalWordsData] = useState<any>(null);
 
-  const imageGenerationMutation = useMutation({
-    mutationFn: async (prompt: string) => {
-      const res = await apiRequest("POST", "/api/generate-image", { prompt });
-      return await res.json();
+  // Get original words for the searched term
+  const originalWordsMutation = useMutation({
+    mutationFn: async (term: string) => {
+      const res = await api.getOriginalWords(term);
+      return res;
     },
     onSuccess: (data) => {
+      setOriginalWordsData(data);
       toast({
-        title: "Imagem gerada",
-        description: "A imagem foi gerada com sucesso.",
+        title: "Palavras originais encontradas",
+        description: "Palavras em hebraico, grego e aramaico foram carregadas.",
       });
     },
     onError: (error) => {
       toast({
-        title: "Erro na geração",
-        description: "Funcionalidade de geração de imagem ainda não implementada.",
+        title: "Erro ao buscar palavras originais",
+        description: error instanceof Error ? error.message : "Erro desconhecido",
         variant: "destructive",
       });
     },
   });
 
-  const handleGenerateImage = () => {
-    const prompt = `Illustration of ${conversation.question} in biblical style`;
-    imageGenerationMutation.mutate(prompt);
+  // Get full chapter content
+  const { data: chapterContent, isLoading: isLoadingChapter } = useQuery({
+    queryKey: ['chapter-content', selectedChapter],
+    queryFn: async () => {
+      if (!selectedChapter) return null;
+      const res = await api.getReferenceContent(selectedChapter);
+      return res.content;
+    },
+    enabled: !!selectedChapter,
+  });
+
+  const searchOriginalWords = () => {
+    originalWordsMutation.mutate(conversation.question);
   };
 
   return (
@@ -145,9 +162,22 @@ export default function ResponseDisplay({ response: data }: ResponseDisplayProps
                 <div key={index} className="border-l-4 border-green-500 pl-4 py-2">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold text-gray-800">{ref.bookTitle}</h4>
-                    <Badge variant="outline" className="bg-green-50 text-green-800">
-                      Página {ref.page}
-                    </Badge>
+                    <div className="flex items-center space-x-2">
+                      <Badge variant="outline" className="bg-green-50 text-green-800">
+                        Página {ref.page}
+                      </Badge>
+                      {ref.chapter && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setSelectedChapter(ref.chapter || null)}
+                          className="text-xs"
+                        >
+                          <Eye className="h-3 w-3 mr-1" />
+                          Ver Completo
+                        </Button>
+                      )}
+                    </div>
                   </div>
                   <blockquote className="text-gray-700 italic text-sm mb-2">
                     "{ref.quote}"
@@ -177,35 +207,101 @@ export default function ResponseDisplay({ response: data }: ResponseDisplayProps
         </Card>
       )}
 
-      {/* Image Generation Option */}
+      {/* Original Words Section */}
       <Card className="bg-white shadow-md">
         <CardContent className="p-6">
           <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
-            <ImageIcon className="text-indigo-600 mr-2" size={20} />
-            Gerar Imagem Ilustrativa
+            <Languages className="text-indigo-600 mr-2" size={20} />
+            Palavras Originais
           </h3>
           <p className="text-sm text-gray-600 mb-4">
-            Gere uma imagem visual para complementar esta resposta sobre {conversation.question.toLowerCase()}.
+            Descubra as palavras chaves em hebraico, grego e aramaico relacionadas à "{conversation.question}".
           </p>
           <Button
-            onClick={handleGenerateImage}
-            disabled={imageGenerationMutation.isPending}
+            onClick={searchOriginalWords}
+            disabled={originalWordsMutation.isPending}
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4"
           >
-            {imageGenerationMutation.isPending ? (
+            {originalWordsMutation.isPending ? (
               <>
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                Gerando...
+                Buscando...
               </>
             ) : (
               <>
-                <ImageIcon className="mr-2 h-4 w-4" />
-                Gerar Imagem
+                <Languages className="mr-2 h-4 w-4" />
+                Buscar Palavras Originais
               </>
             )}
           </Button>
         </CardContent>
       </Card>
+
+      {/* Display Original Words if available */}
+      {originalWordsData && originalWordsData.originalWords && originalWordsData.originalWords.length > 0 && (
+        <Card className="bg-blue-50 shadow-md">
+          <CardContent className="p-6">
+            <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
+              <Languages className="text-blue-600 mr-2" size={20} />
+              Palavras no Idioma Original
+            </h3>
+            
+            <div className="space-y-3">
+              {originalWordsData.originalWords.map((word: any, index: number) => (
+                <div key={index} className="flex items-center space-x-4 p-3 bg-white rounded-lg border">
+                  <div className="flex-shrink-0">
+                    <Badge variant="outline" className={`text-xs ${
+                      word.language === 'grego' ? 'bg-blue-100 text-blue-800' : 
+                      word.language === 'hebraico' ? 'bg-green-100 text-green-800' : 
+                      'bg-purple-100 text-purple-800'
+                    }`}>
+                      {word.language}
+                    </Badge>
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-mono text-lg font-semibold text-gray-800 mb-1">
+                      {word.word}
+                    </div>
+                    <p className="text-sm font-medium text-gray-700 mb-1">
+                      {word.translation}
+                    </p>
+                    <p className="text-xs text-gray-600">
+                      {word.context}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Chapter Content Dialog */}
+      <Dialog open={!!selectedChapter} onOpenChange={() => setSelectedChapter(null)}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold">
+              {selectedChapter}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="mt-4">
+            {isLoadingChapter ? (
+              <div className="flex items-center justify-center p-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+                <span className="ml-2 text-gray-600">Carregando conteúdo...</span>
+              </div>
+            ) : chapterContent ? (
+              <div className="prose prose-sm max-w-none">
+                <pre className="whitespace-pre-wrap font-sans text-gray-700 leading-relaxed">
+                  {chapterContent}
+                </pre>
+              </div>
+            ) : (
+              <p className="text-gray-500">Conteúdo não encontrado para este capítulo.</p>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -113,26 +113,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Generate image based on response
-  app.post("/api/generate-image", async (req, res) => {
+  // Get original words for a term
+  app.post("/api/original-words", async (req, res) => {
     try {
-      const { prompt } = req.body;
+      const { term } = req.body;
       
-      if (!prompt?.trim()) {
-        return res.status(400).json({ error: "Prompt é obrigatório" });
+      if (!term?.trim()) {
+        return res.status(400).json({ error: "Termo é obrigatório" });
       }
 
-      const settings = await storage.getSettings();
-      if (!settings) {
-        return res.status(500).json({ error: "Configurações não encontradas" });
-      }
-
-      const imageUrl = await openRouterService.generateImage(prompt, settings.apiKey);
-      res.json({ imageUrl });
+      const originalWords = await biblicalWordsService.findOriginalWords(term);
+      res.json({ originalWords });
     } catch (error) {
-      console.error("Error generating image:", error);
+      console.error("Error getting original words:", error);
       res.status(500).json({ 
-        error: "Erro ao gerar imagem",
+        error: "Erro ao buscar palavras originais",
         details: error instanceof Error ? error.message : "Erro desconhecido"
       });
     }
@@ -151,6 +146,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error: any) {
       console.error("Erro na busca da Declaração de Fé:", error);
       res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  });
+
+  // Get full reference content
+  app.post("/api/get-reference-content", async (req, res) => {
+    try {
+      const { chapter } = req.body;
+      
+      if (!chapter || typeof chapter !== 'string') {
+        return res.status(400).json({ error: "Capítulo é obrigatório" });
+      }
+
+      const content = await pdfProcessor.getFullChapterContent(chapter);
+      res.json({ content });
+    } catch (error: any) {
+      console.error("Error getting reference content:", error);
+      res.status(500).json({ 
+        error: "Erro ao buscar conteúdo da referência",
+        details: error.message || "Erro desconhecido"
+      });
     }
   });
 
