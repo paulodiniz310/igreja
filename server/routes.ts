@@ -9,6 +9,16 @@ import { biblicalTextService } from "./services/biblical-text";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
+  // Health check endpoint for Render
+  app.get("/health", (_req, res) => {
+    res.json({ 
+      status: "ok", 
+      timestamp: new Date().toISOString(),
+      service: "Sistema Teológico CPAD",
+      version: "1.0.0"
+    });
+  });
+  
   // Query endpoint - main consultation functionality
   app.post("/api/query", async (req, res) => {
     try {
