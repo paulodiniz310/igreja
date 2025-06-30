@@ -19,6 +19,8 @@ interface SettingsModalProps {
 export default function SettingsModal({ isOpen, onClose, settings }: SettingsModalProps) {
   const [apiKey, setApiKey] = useState("");
   const [aiModel, setAiModel] = useState("deepseek/deepseek-r1-0528:free");
+  const [customModel, setCustomModel] = useState("");
+  const [showCustomModel, setShowCustomModel] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -26,6 +28,19 @@ export default function SettingsModal({ isOpen, onClose, settings }: SettingsMod
     if (settings) {
       setApiKey(settings.apiKey);
       setAiModel(settings.aiModel);
+      
+      // Check if it's a custom model (not in predefined list)
+      const predefinedModels = [
+        "deepseek/deepseek-r1-0528:free",
+        "anthropic/claude-3-haiku", 
+        "openai/gpt-3.5-turbo"
+      ];
+      
+      if (!predefinedModels.includes(settings.aiModel)) {
+        setCustomModel(settings.aiModel);
+        setShowCustomModel(true);
+        setAiModel("custom");
+      }
     }
   }, [settings]);
 
@@ -61,9 +76,20 @@ export default function SettingsModal({ isOpen, onClose, settings }: SettingsMod
       return;
     }
 
+    if (aiModel === "custom" && !customModel.trim()) {
+      toast({
+        title: "Modelo personalizado obrigatório",
+        description: "Por favor, insira um nome de modelo válido.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const finalModel = aiModel === "custom" ? customModel.trim() : aiModel;
+
     updateSettingsMutation.mutate({
       apiKey: apiKey.trim(),
-      aiModel,
+      aiModel: finalModel,
     });
   };
 
@@ -97,7 +123,13 @@ export default function SettingsModal({ isOpen, onClose, settings }: SettingsMod
             <Label className="block text-sm font-medium text-gray-700 mb-2">
               Modelo de IA
             </Label>
-            <Select value={aiModel} onValueChange={setAiModel}>
+            <Select 
+              value={aiModel} 
+              onValueChange={(value) => {
+                setAiModel(value);
+                setShowCustomModel(value === "custom");
+              }}
+            >
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
@@ -111,12 +143,33 @@ export default function SettingsModal({ isOpen, onClose, settings }: SettingsMod
                 <SelectItem value="openai/gpt-3.5-turbo">
                   GPT-3.5 Turbo
                 </SelectItem>
+                <SelectItem value="custom">
+                  Modelo Personalizado
+                </SelectItem>
               </SelectContent>
             </Select>
             <p className="text-xs text-gray-500 mt-1">
               Escolha o modelo de IA para as consultas
             </p>
           </div>
+          
+          {showCustomModel && (
+            <div>
+              <Label className="block text-sm font-medium text-gray-700 mb-2">
+                Nome do Modelo Personalizado
+              </Label>
+              <Input
+                type="text"
+                value={customModel}
+                onChange={(e) => setCustomModel(e.target.value)}
+                placeholder="Ex: openai/gpt-4, anthropic/claude-3-sonnet, etc."
+                className="w-full"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Digite o nome completo do modelo conforme a documentação da OpenRouter
+              </p>
+            </div>
+          )}
           
           <div className="pt-4">
             <Button
