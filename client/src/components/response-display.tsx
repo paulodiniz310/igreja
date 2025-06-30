@@ -20,45 +20,7 @@ interface ResponseDisplayProps {
 export default function ResponseDisplay({ response: data }: ResponseDisplayProps) {
   const { toast } = useToast();
   const { conversation, response } = data;
-  const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
-  const [originalWordsData, setOriginalWordsData] = useState<any>(null);
 
-  // Get original words for the searched term
-  const originalWordsMutation = useMutation({
-    mutationFn: async (term: string) => {
-      const res = await api.getOriginalWords(term);
-      return res;
-    },
-    onSuccess: (data) => {
-      setOriginalWordsData(data);
-      toast({
-        title: "Palavras originais encontradas",
-        description: "Palavras em hebraico, grego e aramaico foram carregadas.",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Erro ao buscar palavras originais",
-        description: error instanceof Error ? error.message : "Erro desconhecido",
-        variant: "destructive",
-      });
-    },
-  });
-
-  // Get full chapter content
-  const { data: chapterContent, isLoading: isLoadingChapter } = useQuery({
-    queryKey: ['chapter-content', selectedChapter],
-    queryFn: async () => {
-      if (!selectedChapter) return null;
-      const res = await api.getReferenceContent(selectedChapter);
-      return res.content;
-    },
-    enabled: !!selectedChapter,
-  });
-
-  const searchOriginalWords = () => {
-    originalWordsMutation.mutate(conversation.question);
-  };
 
   return (
     <div className="space-y-4">
@@ -162,22 +124,9 @@ export default function ResponseDisplay({ response: data }: ResponseDisplayProps
                 <div key={index} className="border-l-4 border-green-500 pl-4 py-2">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold text-gray-800">{ref.bookTitle}</h4>
-                    <div className="flex items-center space-x-2">
-                      <Badge variant="outline" className="bg-green-50 text-green-800">
-                        Página {ref.page}
-                      </Badge>
-                      {ref.chapter && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setSelectedChapter(ref.chapter || null)}
-                          className="text-xs"
-                        >
-                          <Eye className="h-3 w-3 mr-1" />
-                          Ver Completo
-                        </Button>
-                      )}
-                    </div>
+                    <Badge variant="outline" className="bg-green-50 text-green-800">
+                      Página {ref.page}
+                    </Badge>
                   </div>
                   <blockquote className="text-gray-700 italic text-sm mb-2">
                     "{ref.quote}"
@@ -207,101 +156,9 @@ export default function ResponseDisplay({ response: data }: ResponseDisplayProps
         </Card>
       )}
 
-      {/* Original Words Section */}
-      <Card className="bg-white shadow-md">
-        <CardContent className="p-6">
-          <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
-            <Languages className="text-indigo-600 mr-2" size={20} />
-            Palavras Originais
-          </h3>
-          <p className="text-sm text-gray-600 mb-4">
-            Descubra as palavras chaves em hebraico, grego e aramaico relacionadas à "{conversation.question}".
-          </p>
-          <Button
-            onClick={searchOriginalWords}
-            disabled={originalWordsMutation.isPending}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4"
-          >
-            {originalWordsMutation.isPending ? (
-              <>
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                Buscando...
-              </>
-            ) : (
-              <>
-                <Languages className="mr-2 h-4 w-4" />
-                Buscar Palavras Originais
-              </>
-            )}
-          </Button>
-        </CardContent>
-      </Card>
 
-      {/* Display Original Words if available */}
-      {originalWordsData && originalWordsData.originalWords && originalWordsData.originalWords.length > 0 && (
-        <Card className="bg-blue-50 shadow-md">
-          <CardContent className="p-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
-              <Languages className="text-blue-600 mr-2" size={20} />
-              Palavras no Idioma Original
-            </h3>
-            
-            <div className="space-y-3">
-              {originalWordsData.originalWords.map((word: any, index: number) => (
-                <div key={index} className="flex items-center space-x-4 p-3 bg-white rounded-lg border">
-                  <div className="flex-shrink-0">
-                    <Badge variant="outline" className={`text-xs ${
-                      word.language === 'grego' ? 'bg-blue-100 text-blue-800' : 
-                      word.language === 'hebraico' ? 'bg-green-100 text-green-800' : 
-                      'bg-purple-100 text-purple-800'
-                    }`}>
-                      {word.language}
-                    </Badge>
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-mono text-lg font-semibold text-gray-800 mb-1">
-                      {word.word}
-                    </div>
-                    <p className="text-sm font-medium text-gray-700 mb-1">
-                      {word.translation}
-                    </p>
-                    <p className="text-xs text-gray-600">
-                      {word.context}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
-      {/* Chapter Content Dialog */}
-      <Dialog open={!!selectedChapter} onOpenChange={() => setSelectedChapter(null)}>
-        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-bold">
-              {selectedChapter}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="mt-4">
-            {isLoadingChapter ? (
-              <div className="flex items-center justify-center p-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-                <span className="ml-2 text-gray-600">Carregando conteúdo...</span>
-              </div>
-            ) : chapterContent ? (
-              <div className="prose prose-sm max-w-none">
-                <pre className="whitespace-pre-wrap font-sans text-gray-700 leading-relaxed">
-                  {chapterContent}
-                </pre>
-              </div>
-            ) : (
-              <p className="text-gray-500">Conteúdo não encontrado para este capítulo.</p>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
+
     </div>
   );
 }
