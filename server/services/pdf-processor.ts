@@ -380,41 +380,129 @@ class PdfProcessor {
   async searchRelevantContent(question: string): Promise<BookReference[]> {
     const results: BookReference[] = [];
     const searchTerms = this.extractSearchTerms(question);
+    const questionLower = question.toLowerCase();
 
-    // Search through Declaração de Fé content
+    // Primary search: exact term matches with higher priority
     for (const term of searchTerms) {
       const matches = this.declaracaoContent.get(term);
       if (matches) {
         for (const match of matches) {
-          results.push({
-            bookTitle: "Declaração de Fé das Assembleias de Deus",
-            page: match.page,
-            line: match.line,
-            quote: match.text,
-            chapter: match.chapter
-          });
+          // Check relevance by scoring content similarity
+          const relevanceScore = this.calculateRelevanceScore(questionLower, match.text.toLowerCase());
+          if (relevanceScore > 0.3) { // Only include relevant matches
+            results.push({
+              bookTitle: "Declaração de Fé das Assembleias de Deus",
+              page: match.page,
+              line: match.line,
+              quote: match.text,
+              chapter: match.chapter
+            });
+          }
         }
       }
     }
 
-    // Always include fuzzy search for comprehensive coverage
-    const partialMatches = this.fuzzySearch(question.toLowerCase());
-    results.push(...partialMatches);
+    // Secondary search: semantic content search across all entries
+    const semanticMatches = this.semanticContentSearch(questionLower);
+    results.push(...semanticMatches);
 
-    // Ensure we always return results - add default theological references if none found
-    if (results.length === 0) {
-      results.push(
-        {
-          bookTitle: "Declaração de Fé das Assembleias de Deus",
-          page: 15,
-          line: 1,
-          quote: "A Bíblia Sagrada é a única regra infalível de fé normativa para a vida e o caráter cristão.",
-          chapter: "Capítulo I - Sobre as Sagradas Escrituras"
+    // Remove duplicates and limit results
+    const uniqueResults = this.removeDuplicateReferences(results);
+    
+    // Sort by relevance and return top 4 most relevant
+    const sortedResults = this.sortByRelevance(questionLower, uniqueResults);
+    
+    return sortedResults.slice(0, 4);
+  }
+
+  private calculateRelevanceScore(question: string, content: string): number {
+    const questionWords = question.split(/\s+/).filter(word => word.length > 2);
+    const contentWords = content.split(/\s+/);
+    
+    let matches = 0;
+    for (const qWord of questionWords) {
+      for (const cWord of contentWords) {
+        if (cWord.includes(qWord) || qWord.includes(cWord)) {
+          matches++;
         }
-      );
+      }
     }
+    
+    return matches / Math.max(questionWords.length, 1);
+  }
 
+  private semanticContentSearch(question: string): BookReference[] {
+    const results: BookReference[] = [];
+    const questionWords = question.split(/\s+/).filter(word => word.length > 2);
+    
+    // Search across all content for semantic matches
+    this.declaracaoContent.forEach((entries, key) => {
+      for (const entry of entries) {
+        const contentLower = entry.text.toLowerCase();
+        let semanticScore = 0;
+        
+        // Calculate semantic relevance
+        for (const word of questionWords) {
+          if (contentLower.includes(word)) {
+            semanticScore += 1;
+          }
+          // Check for related concepts
+          if (this.areConceptsRelated(word, contentLower)) {
+            semanticScore += 0.5;
+          }
+        }
+        
+        if (semanticScore > 1) { // Threshold for semantic relevance
+          results.push({
+            bookTitle: "Declaração de Fé das Assembleias de Deus",
+            page: entry.page,
+            line: entry.line,
+            quote: entry.text,
+            chapter: entry.chapter
+          });
+        }
+      }
+    });
+    
     return results;
+  }
+
+  private areConceptsRelated(word: string, content: string): boolean {
+    const conceptMappings: Record<string, string[]> = {
+      'salvação': ['redenção', 'perdão', 'graça', 'libertação'],
+      'jesus': ['cristo', 'senhor', 'filho', 'salvador'],
+      'espírito': ['consolador', 'paracleto', 'santo'],
+      'igreja': ['corpo', 'noiva', 'assembleia'],
+      'batismo': ['imersão', 'águas', 'batizar'],
+      'oração': ['jejum', 'intercessão', 'súplica'],
+      'deus': ['pai', 'criador', 'senhor'],
+      'fé': ['crer', 'confiança', 'crença'],
+      'amor': ['caridade', 'misericórdia', 'bondade'],
+      'pecado': ['mal', 'transgressão', 'iniquidade']
+    };
+    
+    const relatedTerms = conceptMappings[word] || [];
+    return relatedTerms.some((term: string) => content.includes(term));
+  }
+
+  private removeDuplicateReferences(results: BookReference[]): BookReference[] {
+    const seen = new Set<string>();
+    return results.filter(ref => {
+      const key = `${ref.page}-${ref.line}`;
+      if (seen.has(key)) {
+        return false;
+      }
+      seen.add(key);
+      return true;
+    });
+  }
+
+  private sortByRelevance(question: string, results: BookReference[]): BookReference[] {
+    return results.sort((a, b) => {
+      const scoreA = this.calculateRelevanceScore(question, a.quote.toLowerCase());
+      const scoreB = this.calculateRelevanceScore(question, b.quote.toLowerCase());
+      return scoreB - scoreA;
+    });
   }
 
   private extractSearchTerms(question: string): string[] {
