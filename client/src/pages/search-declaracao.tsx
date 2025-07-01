@@ -7,7 +7,7 @@ import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Search, Book, MapPin } from "lucide-react";
+import { Search, Book, MapPin, BookOpen } from "lucide-react";
 import { api } from "@/lib/api";
 
 interface SearchResult {
@@ -56,6 +56,12 @@ export default function SearchDeclaracao() {
               </h1>
             </div>
           </div>
+          <Link href="/biblical-dictionary">
+            <Button variant="outline" size="sm" className="flex items-center gap-2">
+              <BookOpen className="h-4 w-4" />
+              Dicionário Bíblico
+            </Button>
+          </Link>
         </div>
         <div className="text-center mb-8">
           <p className="text-gray-600 dark:text-gray-300">

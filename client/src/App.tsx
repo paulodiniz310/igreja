@@ -5,12 +5,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import SearchDeclaracao from "@/pages/search-declaracao";
+import BiblicalDictionary from "@/pages/biblical-dictionary";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/search-declaracao" component={SearchDeclaracao} />
+      <Route path="/biblical-dictionary" component={BiblicalDictionary} />
       <Route component={Home} />
     </Switch>
   );

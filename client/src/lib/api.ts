@@ -49,4 +49,29 @@ export const api = {
     const response = await apiRequest("POST", "/api/get-reference-content", { chapter });
     return await response.json();
   },
+
+  // Biblical Dictionary API
+  async searchDictionary(term: string) {
+    const response = await fetch(`/api/dictionary/search/${encodeURIComponent(term)}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  },
+
+  async getAllDictionaryTerms() {
+    const response = await fetch("/api/dictionary/terms");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  },
+
+  async getDictionaryTermsByCategory(category: string) {
+    const response = await fetch(`/api/dictionary/category/${encodeURIComponent(category)}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  }
 };

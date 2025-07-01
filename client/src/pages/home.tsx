@@ -8,7 +8,7 @@ import PWAInstall from "@/components/pwa-install";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalStorage } from "@/hooks/use-local-storage";
-import { History, Settings, Search, RefreshCw } from "lucide-react";
+import { History, Settings, Search, RefreshCw, Book } from "lucide-react";
 import type { Conversation, Settings as SettingsType } from "@/../../shared/schema";
 
 export default function Home() {
@@ -40,11 +40,22 @@ export default function Home() {
               </div>
             </div>
             <div className="flex space-x-2">
+              <Link href="/biblical-dictionary">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 rounded-full hover:bg-primary-700 text-white"
+                  title="Dicionário Bíblico"
+                >
+                  <Book className="h-5 w-5" />
+                </Button>
+              </Link>
               <Link href="/search-declaracao">
                 <Button
                   variant="ghost"
                   size="sm"
                   className="p-2 rounded-full hover:bg-primary-700 text-white"
+                  title="Buscar Declaração de Fé"
                 >
                   <Search className="h-5 w-5" />
                 </Button>
