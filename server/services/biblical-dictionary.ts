@@ -197,6 +197,37 @@ class BiblicalDictionaryService {
         biblicalReferences: ["Atos 2:4", "1 Coríntios 14:2-4", "1 Coríntios 14:14-15", "Marcos 16:17"],
         category: "doutrina",
         relatedTerms: ["Espírito Santo", "Dom", "Oração", "Edificação", "Pentecostes"]
+      },
+      // Lugares específicos adicionais
+      {
+        term: "Betesda",
+        definition: "Local em Jerusalém onde havia um tanque com cinco alpendres, conhecido por suas propriedades curativas. Jesus curou um paralítico ali.",
+        etymology: "Do aramaico beth-hesda, que significa 'casa da misericórdia' ou 'lugar da graça'",
+        biblicalReferences: ["João 5:1-9"],
+        category: "lugar",
+        relatedTerms: ["Tanque", "Cura", "Jesus", "Jerusalém", "Milagre"]
+      },
+      {
+        term: "Tanque de Betesda", 
+        definition: "Reservatório de água em Jerusalém onde Jesus realizou um milagre de cura, local de grande movimento de enfermos esperando por cura.",
+        biblicalReferences: ["João 5:1-9"],
+        category: "lugar", 
+        relatedTerms: ["Betesda", "Cura", "Jesus", "Milagre", "Jerusalém"]
+      },
+      // Conceitos adicionais
+      {
+        term: "Livre Arbítrio",
+        definition: "Capacidade humana de escolher entre o bem e o mal, dada por Deus. Embora limitada pela natureza pecaminosa, permite ao homem responder ao chamado divino.",
+        biblicalReferences: ["Josué 24:15", "Deuteronômio 30:19", "João 3:16", "Apocalipse 22:17"],
+        category: "conceito",
+        relatedTerms: ["Escolha", "Salvação", "Pecado", "Graça", "Responsabilidade"]
+      },
+      {
+        term: "Milênio",
+        definition: "Período de mil anos de governo de Cristo na Terra, após Sua segunda vinda, quando haverá paz e justiça universais.",
+        biblicalReferences: ["Apocalipse 20:1-6", "Isaías 11:6-9", "Isaías 2:4"],
+        category: "evento",
+        relatedTerms: ["Segunda Vinda", "Reino", "Cristo", "Paz", "Justiça"]
       }
     ];
 
@@ -216,6 +247,20 @@ class BiblicalDictionaryService {
       }
       if (def.term === "Calvário") {
         this.dictionary.set("gólgota", def);
+      }
+      if (def.term === "Betesda") {
+        this.dictionary.set("tanque", def);
+        this.dictionary.set("tanque de betesda", def);
+      }
+      if (def.term === "Livre Arbítrio") {
+        this.dictionary.set("livre arbitrio", def);
+        this.dictionary.set("liberdade", def);
+        this.dictionary.set("escolha", def);
+      }
+      if (def.term === "Milênio") {
+        this.dictionary.set("milenio", def);
+        this.dictionary.set("reino milenar", def);
+        this.dictionary.set("mil anos", def);
       }
     });
   }

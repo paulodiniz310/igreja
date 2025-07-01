@@ -638,13 +638,98 @@ class BiblicalWordsService {
         context: "Tempo sem fim, eternidade"
       }
     ]);
+
+    // Palavras sobre Livre Arbítrio e Escolha
+    this.wordDatabase.set("livre", [
+      {
+        word: "ἐλεύθερος (eleutheros)",
+        language: "grego",
+        translation: "livre, liberado, independente",
+        context: "Liberdade espiritual e moral em Cristo"
+      },
+      {
+        word: "חפשי (chofshi)",
+        language: "hebraico",
+        translation: "livre, libertado",
+        context: "Estado de liberdade dada por Deus"
+      }
+    ]);
+
+    this.wordDatabase.set("arbítrio", [
+      {
+        word: "βουλή (boule)",
+        language: "grego",
+        translation: "vontade, conselho, decisão",
+        context: "Capacidade de tomar decisões deliberadas"
+      },
+      {
+        word: "רצון (ratzon)",
+        language: "hebraico",
+        translation: "vontade, desejo, arbítrio",
+        context: "Vontade e capacidade de escolha"
+      }
+    ]);
+
+    this.wordDatabase.set("escolha", [
+      {
+        word: "ἐκλογή (ekloge)",
+        language: "grego",
+        translation: "escolha, seleção, eleição",
+        context: "Ato de escolher ou ser escolhido por Deus"
+      },
+      {
+        word: "בחר (bachar)",
+        language: "hebraico",
+        translation: "escolher, eleger, selecionar",
+        context: "Ato de fazer uma escolha ou eleição"
+      }
+    ]);
+
+    // Palavras sobre Milênio e Reino
+    this.wordDatabase.set("milênio", [
+      {
+        word: "χίλια ἔτη (chilia ete)",
+        language: "grego",
+        translation: "mil anos",
+        context: "Período profético de mil anos do reino de Cristo"
+      }
+    ]);
+
+    this.wordDatabase.set("reino", [
+      {
+        word: "βασιλεία (basileia)",
+        language: "grego",
+        translation: "reino, reinado, soberania",
+        context: "Reino de Deus e governo divino"
+      },
+      {
+        word: "מלכות (malchut)",
+        language: "hebraico",
+        translation: "reino, reinado, soberania",
+        context: "Reino e autoridade divina"
+      }
+    ]);
   }
 
   async findOriginalWords(text: string): Promise<BiblicalWord[]> {
     const results: BiblicalWord[] = [];
     const searchText = text.toLowerCase();
 
-    // Search for exact matches
+    // Extract key words from the question (simple approach)
+    const words = searchText.split(/\s+/).filter(word => 
+      word.length > 2 && 
+      !['que', 'oque', 'como', 'quando', 'onde', 'por', 'para', 'com', 'sem', 'sobre', 'entre', 'uma', 'uns', 'das', 'dos', 'nas', 'nos'].includes(word)
+    );
+    
+    // Search for each key word in the question
+    for (const word of words) {
+      const exactWords = this.wordDatabase.get(word);
+      if (exactWords) {
+        results.push(...exactWords);
+      }
+    }
+
+    // Search for exact matches in full text
     const entries = Array.from(this.wordDatabase.entries());
     for (const [key, words] of entries) {
       if (searchText.includes(key)) {
@@ -734,6 +819,8 @@ class BiblicalWordsService {
 
     return fallbackWords;
   }
+
+
 
   private findRelatedTerms(text: string): string[] {
     const relatedTerms: string[] = [];
