@@ -6,6 +6,7 @@ import { openRouterService } from "./services/openrouter";
 import { pdfProcessor } from "./services/pdf-processor";
 import { biblicalWordsService } from "./services/biblical-words";
 import { biblicalTextService } from "./services/biblical-text";
+import { biblicalDictionaryService } from "./services/biblical-dictionary";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -187,6 +188,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
         error: "Erro ao buscar conteúdo da referência",
         details: error.message || "Erro desconhecido"
       });
+    }
+  });
+
+  // Biblical Dictionary Routes
+  app.get("/api/dictionary/search/:term", async (req, res) => {
+    try {
+      const { term } = req.params;
+      if (!term?.trim()) {
+        return res.status(400).json({ error: "Termo de busca é obrigatório" });
+      }
+      const results = await biblicalDictionaryService.searchTerm(term);
+      res.json(results);
+    } catch (error) {
+      console.error("Error searching dictionary:", error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  });
+
+  app.get("/api/dictionary/terms", async (req, res) => {
+    try {
+      const terms = await biblicalDictionaryService.getAllTerms();
+      res.json(terms);
+    } catch (error) {
+      console.error("Error fetching all terms:", error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  });
+
+  app.get("/api/dictionary/category/:category", async (req, res) => {
+    try {
+      const { category } = req.params;
+      const terms = await biblicalDictionaryService.getTermsByCategory(category);
+      res.json(terms);
+    } catch (error) {
+      console.error("Error fetching terms by category:", error);
+      res.status(500).json({ error: "Erro interno do servidor" });
     }
   });
 
