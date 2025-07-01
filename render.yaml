@@ -3,21 +3,15 @@ services:
     name: sistema-teologico-cpad
     env: node
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm run start
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DATABASE_URL
-        fromDatabase:
-          name: postgres-teologico
-          property: connectionString
-      - key: OPENROUTER_API_KEY
-        sync: false
+      - key: NODE_VERSION
+        value: 20.19.3
     healthCheckPath: /health
-
-databases:
-  - name: postgres-teologico
-    databaseName: teologico_db
-    user: teologico_user
-    plan: free
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1

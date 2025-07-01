@@ -100,6 +100,12 @@ The application is built as a modern web application with a React frontend and E
 
 ## Changelog
 
+- July 1, 2025: Correção de problemas de build no Render
+  - Identificado problema: Vite em devDependencies não sendo instalado no build do Render
+  - Criado render.yaml com buildCommand que inclui --include=dev
+  - Atualizado build.sh para usar npx e verificar ferramentas de build
+  - Criado RENDER_DEPLOY.md com instruções detalhadas de deploy
+  - Configuração de build command: `npm install --include=dev && npm run build`
 - June 30, 2025: Preparação para deploy no Render
   - Configurado endpoint /health para monitoramento
   - Ajustada configuração de porta para usar process.env.PORT
