@@ -8,6 +8,7 @@ import PWAInstall from "@/components/pwa-install";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalStorage } from "@/hooks/use-local-storage";
+import { useConversations } from "@/hooks/use-conversations";
 import { History, Settings, Search, RefreshCw, Book } from "lucide-react";
 import type { Conversation, Settings as SettingsType } from "@/../../shared/schema";
 
@@ -16,9 +17,8 @@ export default function Home() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [currentResponse, setCurrentResponse] = useLocalStorage('currentResponse', null);
 
-  const { data: conversations } = useQuery<Conversation[]>({
-    queryKey: ['/api/conversations'],
-  });
+  // Use local storage for conversations instead of server
+  const { conversations, addConversation } = useConversations();
 
   const { data: settings } = useQuery<SettingsType>({
     queryKey: ['/api/settings'],
@@ -92,7 +92,10 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="px-4 py-6 space-y-6 pb-20 lg:pb-6">
-        <QueryInput onResponse={setCurrentResponse} />
+        <QueryInput 
+          onResponse={setCurrentResponse} 
+          onConversationSaved={addConversation}
+        />
         
         {currentResponse && (
           <ResponseDisplay response={currentResponse} />

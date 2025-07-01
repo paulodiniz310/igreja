@@ -12,9 +12,10 @@ import type { QueryRequest, BiblicalResponse } from "@shared/schema";
 
 interface QueryInputProps {
   onResponse: (response: any) => void;
+  onConversationSaved?: (conversation: any) => void;
 }
 
-export default function QueryInput({ onResponse }: QueryInputProps) {
+export default function QueryInput({ onResponse, onConversationSaved }: QueryInputProps) {
   const [question, setQuestion] = useState("");
   const [responseLevel, setResponseLevel] = useState<"simples" | "intermediario" | "avancado">("intermediario");
   const { toast } = useToast();
@@ -27,8 +28,11 @@ export default function QueryInput({ onResponse }: QueryInputProps) {
     },
     onSuccess: (data) => {
       onResponse(data);
+      // Save conversation locally instead of relying on server
+      if (onConversationSaved && data.conversation) {
+        onConversationSaved(data.conversation);
+      }
       setQuestion("");
-      queryClient.invalidateQueries({ queryKey: ['/api/conversations'] });
       toast({
         title: "Consulta realizada",
         description: "Sua pergunta foi processada com sucesso.",
