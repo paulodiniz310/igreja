@@ -95,12 +95,15 @@ export default function SettingsModal({ isOpen, onClose, settings }: SettingsMod
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-md" aria-describedby="settings-description">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-gray-800">
             Configurações
           </DialogTitle>
         </DialogHeader>
+        <div id="settings-description" className="sr-only">
+          Configure sua chave API e modelo de IA para o sistema teológico
+        </div>
         
         <div className="space-y-4 py-4">
           <div>

@@ -68,7 +68,30 @@ O build deve criar:
 - Build logs no Render mostrarão se o Vite foi encontrado
 - Runtime logs mostrarão se o servidor está iniciando corretamente
 
+## Correções Implementadas (Janeiro 2025)
+
+### Problema 1: Manifest.json com erro de sintaxe
+**Solução**: Simplificado o manifest.json removendo elementos problemáticos:
+- Removido screenshots array que causava erro
+- Atualizado name para "Sistema Teológico" 
+- Mantidos apenas campos essenciais para PWA
+
+### Problema 2: Erros React DOM manipulation
+**Soluções aplicadas**:
+- Adicionado `aria-describedby` aos DialogContent para corrigir warnings
+- Implementado ErrorBoundary para capturar erros React
+- Melhorada lógica de renderização condicional
+- Estabilizada estrutura DOM com containers fixos
+
+### Problema 3: PWA Install não funcionando
+**Soluções**:
+- Melhorada detecção de instalação do app
+- Adicionado fallback com instruções manuais
+- Corrigida lógica de evento beforeinstallprompt
+
 ## Próximos Passos
-1. Faça commit e push dessas alterações para o GitHub
+1. Faça commit e push dessas correções para o GitHub
 2. Triggere um novo deploy no Render
 3. Monitore os logs de build para confirmar que o Vite é encontrado
+4. Teste o manifest.json no navegador (/manifest.json)
+5. Verifique se os erros DOM foram resolvidos no console

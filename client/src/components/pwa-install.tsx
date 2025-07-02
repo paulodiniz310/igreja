@@ -93,6 +93,7 @@ export default function PWAInstall() {
     localStorage.setItem('pwa-install-dismissed', 'true');
   };
 
+  // Sempre renderizar null se não deve mostrar, evitando problemas de DOM
   if (!isVisible || isInstalled) {
     return null;
   }
