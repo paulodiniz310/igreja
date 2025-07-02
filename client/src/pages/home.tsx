@@ -9,13 +9,15 @@ import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useConversations } from "@/hooks/use-conversations";
-import { History, Settings, Search, RefreshCw, Book } from "lucide-react";
+import { History, Settings, Search, RefreshCw, Book, LogOut } from "lucide-react";
+import { useAuth } from "@/hooks/use-auth";
 import type { Conversation, Settings as SettingsType } from "@/../../shared/schema";
 
 export default function Home() {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [currentResponse, setCurrentResponse] = useLocalStorage('currentResponse', null);
+  const { logout } = useAuth();
 
   // Use local storage for conversations instead of server
   const { conversations, addConversation } = useConversations();
@@ -82,8 +84,18 @@ export default function Home() {
                 size="sm"
                 onClick={() => setIsSettingsOpen(true)}
                 className="p-2 rounded-full hover:bg-primary-700 text-white"
+                title="Configurações"
               >
                 <Settings className="h-5 w-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={logout}
+                className="p-2 rounded-full hover:bg-red-600 text-white"
+                title="Sair do sistema"
+              >
+                <LogOut className="h-5 w-5" />
               </Button>
             </div>
           </div>

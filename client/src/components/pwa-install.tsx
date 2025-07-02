@@ -20,7 +20,8 @@ export default function PWAInstall() {
   useEffect(() => {
     // Check if app is already installed
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
-                        (window.navigator as any).standalone === true;
+                        (window.navigator as any).standalone === true ||
+                        localStorage.getItem('pwa-installed') === 'true';
     
     if (isStandalone) {
       setIsInstalled(true);
@@ -51,6 +52,7 @@ export default function PWAInstall() {
     // Show install prompt after a short delay if conditions are met
     const timer = setTimeout(() => {
       if (!isInstalled && !hasBeenDismissed) {
+        // Sempre mostrar o botão de instalação se não estiver instalado
         setIsVisible(true);
       }
     }, 3000);
@@ -64,15 +66,25 @@ export default function PWAInstall() {
 
   const handleInstallClick = async () => {
     if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      
-      if (outcome === 'accepted') {
-        setIsInstalled(true);
+      try {
+        await deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        if (outcome === 'accepted') {
+          setIsInstalled(true);
+          localStorage.setItem('pwa-installed', 'true');
+        }
+        
+        setDeferredPrompt(null);
+        setIsVisible(false);
+      } catch (error) {
+        console.error('Error during PWA installation:', error);
+        // Fallback para navegadores que não suportam PWA
+        alert('Para instalar o app:\n\n1. No Chrome/Edge: Menu > Instalar app\n2. No Safari: Compartilhar > Adicionar à tela inicial');
       }
-      
-      setDeferredPrompt(null);
-      setIsVisible(false);
+    } else {
+      // Fallback manual para quando o evento beforeinstallprompt não está disponível
+      alert('Para instalar o app:\n\n1. No Chrome/Edge: Menu > Instalar app\n2. No Safari: Compartilhar > Adicionar à tela inicial\n3. No Firefox: Menu > Instalar');
     }
   };
 
