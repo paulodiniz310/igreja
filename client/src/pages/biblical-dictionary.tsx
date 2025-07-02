@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { api } from "@/lib/api";
-import { Search, Book, User, MapPin, Lightbulb, Package, Calendar, Church, ArrowLeft, FileText } from "lucide-react";
+import { Search, Book, User, MapPin, Lightbulb, Package, Calendar, Church, ArrowLeft, FileText, Bot } from "lucide-react";
 
 interface BiblicalDefinition {
   term: string;
@@ -50,6 +52,8 @@ export default function BiblicalDictionary() {
   const [searchResults, setSearchResults] = useState<BiblicalDefinition[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("todos");
+  const [enableAI, setEnableAI] = useState(false);
+  const [aiResponse, setAiResponse] = useState<string>("");
 
   // Query para buscar termos por categoria
   const { data: categoryTerms } = useQuery({
@@ -58,13 +62,38 @@ export default function BiblicalDictionary() {
     enabled: selectedCategory !== "todos"
   });
 
+  // Mutação para busca com IA
+  const aiSearchMutation = useMutation({
+    mutationFn: async (question: string) => {
+      const response = await api.query({
+        question: `Explique sobre "${question}" segundo a doutrina da Assembleia de Deus CPAD. Forneça uma resposta teológica fundamentada.`,
+        responseLevel: "intermediario"
+      });
+      return response;
+    },
+    onSuccess: (data) => {
+      setAiResponse(data.response.adExplanation);
+    },
+    onError: (error) => {
+      console.error("Erro na busca com IA:", error);
+      setAiResponse("Erro ao consultar a IA. Verifique se a chave de API está configurada nas configurações.");
+    }
+  });
+
   const handleSearch = async () => {
     if (!searchTerm.trim()) return;
     
     setIsSearching(true);
+    setAiResponse(""); // Limpar resposta anterior da IA
+    
     try {
       const results = await api.searchDictionary(searchTerm);
       setSearchResults(results);
+      
+      // Se a IA estiver habilitada e não houver resultados no dicionário, consultar a IA
+      if (enableAI && (results.length === 0 || searchTerm.trim().length > 0)) {
+        aiSearchMutation.mutate(searchTerm);
+      }
     } catch (error) {
       console.error("Erro na busca:", error);
       setSearchResults([]);
@@ -112,6 +141,19 @@ export default function BiblicalDictionary() {
         {/* Barra de Pesquisa */}
         <Card className="mb-6">
           <CardContent className="p-4">
+            {/* Checkbox para habilitar IA */}
+            <div className="flex items-center space-x-2 mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+              <Checkbox 
+                id="enable-ai" 
+                checked={enableAI}
+                onCheckedChange={(checked) => setEnableAI(checked as boolean)}
+              />
+              <Label htmlFor="enable-ai" className="text-sm font-medium text-blue-800 flex items-center cursor-pointer">
+                <Bot className="h-4 w-4 mr-2" />
+                Habilitar resposta da IA baseada na doutrina da Assembleia de Deus CPAD
+              </Label>
+            </div>
+            
             <div className="flex space-x-2">
               <Input
                 placeholder="Digite um termo para pesquisar (ex: Jesus, Fé, Jerusalém, Salvação...)"
@@ -252,6 +294,33 @@ export default function BiblicalDictionary() {
               );
             })}
           </div>
+        )}
+
+        {/* Resposta da IA CPAD */}
+        {(aiSearchMutation.isPending || aiResponse) && (
+          <Card className="mt-6 border-blue-200 bg-blue-50">
+            <CardContent className="p-6">
+              <div className="flex items-center mb-4">
+                <Bot className="h-6 w-6 text-blue-600 mr-3" />
+                <h3 className="text-lg font-semibold text-blue-800">
+                  Resposta da IA - Doutrina Assembleia de Deus CPAD
+                </h3>
+              </div>
+              
+              {aiSearchMutation.isPending ? (
+                <div className="flex items-center text-blue-600">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
+                  Consultando IA baseada na doutrina CPAD...
+                </div>
+              ) : aiResponse && (
+                <div className="prose max-w-none">
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                    {aiResponse}
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         )}
 
         {/* Estado de busca sem resultados */}
