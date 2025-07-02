@@ -54,7 +54,7 @@ export default function LoginForm() {
             <Lock className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-gray-800 mb-2">
-            Sistema Teológico CPAD
+            Sistema Teológico
           </h1>
           <p className="text-gray-600 text-sm">
             Faça login para acessar o sistema de consultas bíblicas
