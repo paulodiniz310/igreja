@@ -42,6 +42,70 @@ class BiblicalDictionaryService {
         relatedTerms: ["Isaac", "Isaque", "Aliança", "Promessa", "Fé"]
       },
       {
+        term: "Isaac",
+        definition: "Filho da promessa de Abraão e Sara, nascido em sua velhice. Foi oferecido por Abraão no monte Moriá, prefigurando o sacrifício de Cristo.",
+        etymology: "Significa 'riso' ou 'ele ri', nome dado porque Sara riu quando soube que teria um filho",
+        biblicalReferences: ["Gênesis 21:1-3", "Gênesis 22:1-19", "Hebreus 11:17-19"],
+        category: "pessoa",
+        relatedTerms: ["Abraão", "Sara", "Promessa", "Sacrifício", "Aliança"]
+      },
+      {
+        term: "Isaque",
+        definition: "Filho da promessa de Abraão e Sara, nascido em sua velhice. Foi oferecido por Abraão no monte Moriá, prefigurando o sacrifício de Cristo.",
+        etymology: "Significa 'riso' ou 'ele ri', nome dado porque Sara riu quando soube que teria um filho",
+        biblicalReferences: ["Gênesis 21:1-3", "Gênesis 22:1-19", "Hebreus 11:17-19"],
+        category: "pessoa",
+        relatedTerms: ["Abraão", "Sara", "Promessa", "Sacrifício", "Aliança"]
+      },
+      {
+        term: "Jacó",
+        definition: "Neto de Abraão, filho de Isaac, cujo nome foi mudado para Israel após lutar com o anjo. Pai das doze tribos de Israel.",
+        etymology: "Significa 'aquele que segura o calcanhar' ou 'suplantador'",
+        biblicalReferences: ["Gênesis 25:26", "Gênesis 32:28", "Gênesis 49:1-28"],
+        category: "pessoa",
+        relatedTerms: ["Israel", "Isaac", "Esaú", "Doze Tribos", "Betel"]
+      },
+      {
+        term: "José",
+        definition: "Filho amado de Jacó, vendido como escravo pelos irmãos, tornou-se governador do Egito e salvou sua família da fome.",
+        etymology: "Significa 'Deus acrescenta' ou 'Ele acrescentará'",
+        biblicalReferences: ["Gênesis 37:3", "Gênesis 41:40", "Gênesis 45:4-8"],
+        category: "pessoa",
+        relatedTerms: ["Jacó", "Egito", "Sonhos", "Perdão", "Providência"]
+      },
+      {
+        term: "Samuel",
+        definition: "Último juiz e primeiro profeta de Israel, ungiu Saul e Davi como reis. Estabeleceu a escola de profetas.",
+        etymology: "Significa 'ouvido por Deus' ou 'pedido a Deus'",
+        biblicalReferences: ["1 Samuel 3:1-10", "1 Samuel 16:13", "1 Samuel 8:4-22"],
+        category: "pessoa",
+        relatedTerms: ["Ana", "Eli", "Saul", "Davi", "Profeta"]
+      },
+      {
+        term: "Saul",
+        definition: "Primeiro rei de Israel, ungido por Samuel. Inicialmente obediente, depois desobedeceu a Deus e foi rejeitado como rei.",
+        etymology: "Significa 'pedido' ou 'emprestado'",
+        biblicalReferences: ["1 Samuel 9:15-17", "1 Samuel 13:13-14", "1 Samuel 15:22-23"],
+        category: "pessoa",
+        relatedTerms: ["Samuel", "Davi", "Rei", "Desobediência", "Rejeição"]
+      },
+      {
+        term: "Paulo",
+        definition: "Apóstolo dos gentios, antes conhecido como Saulo de Tarso. Convertido no caminho de Damasco, escreveu grande parte do Novo Testamento.",
+        etymology: "Do latim Paulus, significa 'pequeno'",
+        biblicalReferences: ["Atos 9:1-19", "1 Coríntios 15:9", "Efésios 3:8", "1 Timóteo 1:15"],
+        category: "pessoa",
+        relatedTerms: ["Saulo", "Damasco", "Gentios", "Cartas", "Missões"]
+      },
+      {
+        term: "Pedro",
+        definition: "Apóstolo de Jesus, líder dos doze, pescador que se tornou pescador de homens. Recebeu as chaves do Reino dos Céus.",
+        etymology: "Do grego Petros, significa 'pedra' ou 'rocha'",
+        biblicalReferences: ["Mateus 16:16-19", "João 21:15-17", "Atos 2:14-41", "1 Pedro 1:1"],
+        category: "pessoa",
+        relatedTerms: ["Simão", "Rocha", "Chaves", "Pescador", "Apóstolo"]
+      },
+      {
         term: "Moisés",
         definition: "Grande profeta e legislador de Israel, usado por Deus para tirar o povo do Egito e receber a Lei no monte Sinai.",
         etymology: "Possivelmente significa 'tirado das águas' ou de origem egípcia",
@@ -228,6 +292,80 @@ class BiblicalDictionaryService {
         biblicalReferences: ["Apocalipse 20:1-6", "Isaías 11:6-9", "Isaías 2:4"],
         category: "evento",
         relatedTerms: ["Segunda Vinda", "Reino", "Cristo", "Paz", "Justiça"]
+      },
+      // Anjos e seres celestiais
+      {
+        term: "Serafim",
+        definition: "Seres celestiais de alta hierarquia que servem diante do trono de Deus. Têm seis asas e proclamam a santidade divina.",
+        etymology: "Do hebraico saraph, significa 'ardente' ou 'queimador'",
+        biblicalReferences: ["Isaías 6:2-6"],
+        category: "pessoa",
+        relatedTerms: ["Anjo", "Querubim", "Santidade", "Trono", "Purificação"]
+      },
+      {
+        term: "Querubim",
+        definition: "Seres angelicais guardiões da santidade de Deus, representados com múltiplas faces e asas. Guardam o trono divino e o Éden.",
+        etymology: "Do hebraico kerub, possivelmente significa 'guardião'",
+        biblicalReferences: ["Gênesis 3:24", "Ezequiel 10:1-22", "Salmo 18:10"],
+        category: "pessoa",
+        relatedTerms: ["Anjo", "Serafim", "Éden", "Glória", "Guardião"]
+      },
+      {
+        term: "Arcanjo",
+        definition: "Anjo de alta hierarquia com autoridade especial. Miguel e Gabriel são os únicos mencionados explicitamente na Bíblia.",
+        etymology: "Do grego arkhangelos, significa 'anjo principal'",
+        biblicalReferences: ["1 Tessalonicenses 4:16", "Judas 1:9", "Daniel 10:13"],
+        category: "pessoa",
+        relatedTerms: ["Miguel", "Gabriel", "Anjo", "Autoridade", "Guerra"]
+      },
+      {
+        term: "Miguel",
+        definition: "Arcanjo guerreiro de Deus, protetor de Israel, que luta contra Satanás e as forças do mal.",
+        etymology: "Do hebraico Mikha'el, significa 'quem é como Deus?'",
+        biblicalReferences: ["Daniel 10:13", "Daniel 12:1", "Judas 1:9", "Apocalipse 12:7"],
+        category: "pessoa",
+        relatedTerms: ["Arcanjo", "Guerra", "Protetor", "Israel", "Satanás"]
+      },
+      {
+        term: "Gabriel",
+        definition: "Arcanjo mensageiro de Deus, anunciou o nascimento de João Batista e de Jesus Cristo.",
+        etymology: "Do hebraico Gabri'el, significa 'força de Deus' ou 'Deus é forte'",
+        biblicalReferences: ["Daniel 8:16", "Daniel 9:21", "Lucas 1:19", "Lucas 1:26"],
+        category: "pessoa",
+        relatedTerms: ["Arcanjo", "Mensageiro", "Anunciação", "Maria", "João Batista"]
+      },
+      // Mulheres importantes
+      {
+        term: "Maria",
+        definition: "Mãe de Jesus Cristo, virgem escolhida por Deus para dar à luz o Salvador. Exemplo de fé e obediência.",
+        etymology: "Possivelmente significa 'amada' ou 'amargor'",
+        biblicalReferences: ["Lucas 1:26-38", "Mateus 1:18-25", "João 2:1-5", "João 19:25-27"],
+        category: "pessoa",
+        relatedTerms: ["Jesus", "Virgem", "Anunciação", "José", "Obediência"]
+      },
+      {
+        term: "Sara",
+        definition: "Esposa de Abraão, mãe de Isaac. Riu quando Deus prometeu que teria um filho na velhice, mas Deus cumpriu a promessa.",
+        etymology: "Significa 'princesa' ou 'nobre'",
+        biblicalReferences: ["Gênesis 17:15-16", "Gênesis 18:10-15", "Gênesis 21:1-7", "Hebreus 11:11"],
+        category: "pessoa",
+        relatedTerms: ["Abraão", "Isaac", "Promessa", "Riso", "Fé"]
+      },
+      {
+        term: "Rute",
+        definition: "Moabita que se converteu ao Deus de Israel e seguiu sua sogra Noemi. Ancestral do rei Davi e de Jesus.",
+        etymology: "Possivelmente significa 'amizade' ou 'companheira'",
+        biblicalReferences: ["Rute 1:16-17", "Rute 4:13-17", "Mateus 1:5"],
+        category: "pessoa",
+        relatedTerms: ["Noemi", "Boaz", "Lealdade", "Conversão", "Davi"]
+      },
+      {
+        term: "Ester",
+        definition: "Rainha judia na Pérsia que salvou seu povo do extermínio planejado por Hamã. Demonstrou coragem e fé.",
+        etymology: "Possivelmente derivado de Ishtar (deusa), ou significa 'estrela'",
+        biblicalReferences: ["Ester 4:14", "Ester 7:3-6", "Ester 8:3-8"],
+        category: "pessoa",
+        relatedTerms: ["Mardoqueu", "Hamã", "Purim", "Coragem", "Libertação"]
       }
     ];
 
@@ -266,54 +404,124 @@ class BiblicalDictionaryService {
   }
 
   async searchTerm(searchTerm: string): Promise<BiblicalDefinition[]> {
-    const results: BiblicalDefinition[] = [];
     const normalizedSearch = searchTerm.toLowerCase().trim();
+    const found = new Set<string>(); // Para evitar duplicatas
+    const results: BiblicalDefinition[] = [];
 
-    // Busca exata
+    // 1. Busca exata primeiro
     const exactMatch = this.dictionary.get(normalizedSearch);
-    if (exactMatch) {
+    if (exactMatch && !found.has(exactMatch.term)) {
       results.push(exactMatch);
+      found.add(exactMatch.term);
     }
 
-    // Busca parcial no termo
+    // 2. Busca que começa com o termo
     for (const [key, definition] of Array.from(this.dictionary.entries())) {
-      if (key.includes(normalizedSearch) && key !== normalizedSearch) {
+      if (key.startsWith(normalizedSearch) && 
+          key !== normalizedSearch && 
+          !found.has(definition.term)) {
         results.push(definition);
+        found.add(definition.term);
       }
     }
 
-    // Busca na definição
+    // 3. Busca parcial no termo
+    for (const [key, definition] of Array.from(this.dictionary.entries())) {
+      if (key.includes(normalizedSearch) && 
+          !key.startsWith(normalizedSearch) && 
+          key !== normalizedSearch && 
+          !found.has(definition.term)) {
+        results.push(definition);
+        found.add(definition.term);
+      }
+    }
+
+    // 4. Busca na definição
     for (const [key, definition] of Array.from(this.dictionary.entries())) {
       if (definition.definition.toLowerCase().includes(normalizedSearch) && 
-          !results.some(r => r.term === definition.term)) {
+          !found.has(definition.term)) {
         results.push(definition);
+        found.add(definition.term);
       }
     }
 
-    // Busca nos termos relacionados
+    // 5. Busca nos termos relacionados
     for (const [key, definition] of Array.from(this.dictionary.entries())) {
       if (definition.relatedTerms.some((term: string) => 
           term.toLowerCase().includes(normalizedSearch)) && 
-          !results.some(r => r.term === definition.term)) {
+          !found.has(definition.term)) {
         results.push(definition);
+        found.add(definition.term);
       }
     }
 
-    // Limitar resultados e ordenar por relevância
-    return results.slice(0, 10).sort((a, b) => {
-      // Priorizar correspondência exata no termo
-      if (a.term.toLowerCase() === normalizedSearch) return -1;
-      if (b.term.toLowerCase() === normalizedSearch) return 1;
-      
-      // Priorizar correspondência que começa com o termo
-      const aStarts = a.term.toLowerCase().startsWith(normalizedSearch);
-      const bStarts = b.term.toLowerCase().startsWith(normalizedSearch);
-      if (aStarts && !bStarts) return -1;
-      if (!aStarts && bStarts) return 1;
-      
-      // Ordenar alfabeticamente
-      return a.term.localeCompare(b.term);
-    });
+    // Se não encontrou resultados, tentar buscar com IA
+    if (results.length === 0) {
+      const aiResult = await this.searchWithAI(searchTerm);
+      if (aiResult) {
+        results.push(aiResult);
+      }
+    }
+
+    // Limitar a 8 resultados únicos
+    return results.slice(0, 8);
+  }
+
+  private async searchWithAI(searchTerm: string): Promise<BiblicalDefinition | null> {
+    try {
+      // Tentar buscar informações sobre o termo usando IA
+      const prompt = `Como especialista em teologia bíblica, forneça uma definição para o termo "${searchTerm}" no formato JSON:
+{
+  "term": "${searchTerm}",
+  "definition": "Definição detalhada e teológicamente precisa",
+  "etymology": "Etimologia se conhecida", 
+  "biblicalReferences": ["Referência 1", "Referência 2"],
+  "category": "pessoa|lugar|conceito|objeto|evento|doutrina",
+  "relatedTerms": ["Termo 1", "Termo 2"]
+}
+
+Se o termo não for bíblico ou teológico, retorne null.`;
+
+      // Usar a API OpenRouter se disponível
+      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY || 'sk-or-v1-demo'}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: 'anthropic/claude-3-haiku',
+          messages: [{ role: 'user', content: prompt }],
+          max_tokens: 500,
+          temperature: 0.3
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const content = data.choices[0]?.message?.content;
+        
+        if (content && content !== 'null') {
+          try {
+            const parsed = JSON.parse(content);
+            return parsed as BiblicalDefinition;
+          } catch {
+            // Se não conseguir parsear JSON, criar definição básica
+            return {
+              term: searchTerm,
+              definition: content,
+              biblicalReferences: [],
+              category: "conceito",
+              relatedTerms: []
+            };
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Erro na busca com IA:', error);
+    }
+    
+    return null;
   }
 
   async getAllTerms(): Promise<string[]> {

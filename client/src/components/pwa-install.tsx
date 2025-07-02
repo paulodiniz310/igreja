@@ -79,13 +79,31 @@ export default function PWAInstall() {
         setIsVisible(false);
       } catch (error) {
         console.error('Error during PWA installation:', error);
-        // Fallback para navegadores que não suportam PWA
-        alert('Para instalar o app:\n\n1. No Chrome/Edge: Menu > Instalar app\n2. No Safari: Compartilhar > Adicionar à tela inicial');
+        showMobileInstallInstructions();
       }
     } else {
-      // Fallback manual para quando o evento beforeinstallprompt não está disponível
-      alert('Para instalar o app:\n\n1. No Chrome/Edge: Menu > Instalar app\n2. No Safari: Compartilhar > Adicionar à tela inicial\n3. No Firefox: Menu > Instalar');
+      // Detectar tipo de dispositivo e mostrar instruções específicas
+      showMobileInstallInstructions();
     }
+  };
+
+  const showMobileInstallInstructions = () => {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+    const isSamsung = /SamsungBrowser/.test(navigator.userAgent);
+    
+    let instructions = '';
+    
+    if (isIOS) {
+      instructions = 'Para instalar no iPhone/iPad:\n\n1. Toque no ícone de compartilhar (□↗)\n2. Role para baixo e toque em "Adicionar à tela inicial"\n3. Toque em "Adicionar"';
+    } else if (isAndroid || isSamsung) {
+      instructions = 'Para instalar no Android:\n\n1. Toque no menu (⋮) do navegador\n2. Toque em "Instalar app" ou "Adicionar à tela inicial"\n3. Confirme a instalação';
+    } else {
+      instructions = 'Para instalar:\n\n• Chrome/Edge: Menu > Instalar app\n• Safari: Compartilhar > Adicionar à tela inicial\n• Firefox: Menu > Instalar';
+    }
+    
+    alert(instructions);
+    setIsVisible(false);
   };
 
   const handleDismiss = () => {
@@ -119,7 +137,7 @@ export default function PWAInstall() {
         </div>
         
         <p className="text-xs text-gray-600 mb-3">
-          Instale o Sistema Teológico CPAD para acesso rápido e offline.
+          Instale o Sistema Teológico para acesso rápido e offline.
         </p>
         
         <div className="flex space-x-2">
